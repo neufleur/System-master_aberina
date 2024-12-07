@@ -124,7 +124,8 @@ class RegisterController extends Controller
                 $data = $old_year . '-' . $old_month . '-' . $old_day;
                 $birth_day = date('Y-m-d', strtotime($data));
                 $subjects = $request->subject;
-
+                Log::info('Subjects from request: ', ['subjects' => $subjects]);
+dd($subjects);
             $user_get = User::create([
                 'over_name' => $request->over_name,
                 'under_name' => $request->under_name,
@@ -136,23 +137,39 @@ class RegisterController extends Controller
                 'role' => $request->role,
                 'password' => bcrypt($request->password)
             ]);
+                   Log::info('User created: ', ['user' => $user_get]);
 
-            // ユーザー作成が成功したか確認　$user_getがnullでないことを確認
+            // $user_getに新しいユーザーの情報が格納される　$user_getがnullでないことを確認
+            //Log::infoを追加することで、プログラムがどのように実行されているかを詳細に追跡できるようになる
             if ($user_get) {
-            $user = User::findOrFail($user_get->id); //findOrFail 一致するidが見つからなかった場合は、エラーを返します。
+                $user = User::find($user_get->id);
+                if (!$user) {
+                    Log::warning('User not found after creation: ', ['user_id' => $user_get->id]);
+                    //$user_get->idを基に再取得した際に該当するユーザーが見つからなかった場合にこのログが記録される
+                    DB::rollback();
+                    return redirect('/register');
+                }
+                Log::info('User found: ', ['user' => $user]); //$userが正常に見つかった場合に、その情報をログに記録します。
 
-            $user->subjects()->attach($subjects);
-            DB::commit();
-            return view('auth.login.login');
-            }else{
-                 // ユーザー作成に失敗した場合
-            DB::rollback();
-            return redirect('/register');
+                if (!$subjects) {
+                    Log::warning('Subjects are null for user: ', ['user' => $user]);
+                    //subjectsの情報が見つからない場合
+                    DB::rollback();
+                    return redirect('/register')->with('error', '科目情報が見つかりません。');
+                }
+                $user->subjects()->attach($subjects);
+                DB::commit();
+                return view('auth.login.login');
+            } else {
+                Log::warning('User creation failed: user_get is null');
+                DB::rollback();
+                return redirect('/register')->with('error', 'ユーザーの作成に失敗しました。');
             }
-    }catch(\Exception $e){ //\Exception $e 例外処理
-        // ログにエラーを記録
-        DB::rollback(); //何らかのエラーが発生した場合、すべての変更を元に戻すためにロールバックします
-            return redirect()->route('loginView');
+              }catch(\Exception $e){ //\Exception $e 例外処理 try-catchブロックを明確に区切る
+                // ログにエラーを記録
+                Log::error('Error:', ['exception' => $e]);
+                DB::rollback(); //何らかのエラーが発生した場合、すべての変更を元に戻すためにロールバックします
+                return redirect()->route('loginView');
         }
     }
 }
