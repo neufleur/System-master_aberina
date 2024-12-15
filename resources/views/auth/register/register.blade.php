@@ -176,7 +176,7 @@
                     <label class="d-block m-0" style="font-size:13px">選択科目</label>
                     @foreach ($subjects as $subject)
                         <div class="">
-                            <input type="checkbox" name="subject[]" value="{{ $subject->id }}">
+                            <input type="checkbox" name="subject[]" value="{{ $subject->id }}"> <!--[] 括弧をつけることで複数選択肢を配列として受け取ることができる -->
                             <label>{{ $subject->subject }}</label>
                         </div>
                     @endforeach
@@ -194,7 +194,7 @@
                     </div>
                 </div>
                 <div class="mt-5 text-right">
-                    <input type="submit" class="btn btn-primary register_btn" disabled value="新規登録"
+                    <input type="submit" class="btn btn-primary register_btn" value="新規登録"
                         onclick="return confirm('登録してよろしいですか？')">
                 </div>
                 <div class="text-center">

@@ -12,7 +12,7 @@ class Subjects extends Model
 
 
     protected $fillable = [
-        'subject'
+        'name','subject'
     ];
 
 //usersテーブルとsubjectsテーブルのリレーション

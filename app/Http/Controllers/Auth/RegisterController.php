@@ -37,7 +37,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/register';
 
     /**
      * Create a new controller instance.
@@ -63,6 +63,7 @@ class RegisterController extends Controller
 
     public function registerPost(Request $request)
     {
+         Log::info('Request data:', $request->all()); // これを追加してリクエストデータをログに記録
      if ($request->isMethod ('post') ){
 
         $rulus = [
@@ -76,6 +77,7 @@ class RegisterController extends Controller
             'old_month'=> 'required',
             'old_day'=> 'required',
             'role'=>'required|in:1,2,3,4',
+            'subjects' => 'array',
             'password' =>'required|alpha_num|min:8|max:30|confirmed|string',
                  ];
         $message = [
@@ -101,6 +103,7 @@ class RegisterController extends Controller
             'old_month.required' => '月は必ず入力してください。',
             'old_day.required' => '日は必ず入力してください。',
             'role'=>'役職を選択してください。',
+            'subjects.required' => '科目は必須項目です。',
             'password. required'=>'パスワードは入力必須です。',
             'password.min'=>'パスワードは8文字以上、30文字以下で入力してください。',
             'password.max'=>'パスワードは8文字以上、30文字以下で入力してください。',
@@ -125,7 +128,7 @@ class RegisterController extends Controller
                 $birth_day = date('Y-m-d', strtotime($data));
                 $subjects = $request->subject;
                 Log::info('Subjects from request: ', ['subjects' => $subjects]);
-dd($subjects);
+// dd($subjects);
             $user_get = User::create([
                 'over_name' => $request->over_name,
                 'under_name' => $request->under_name,
@@ -137,6 +140,8 @@ dd($subjects);
                 'role' => $request->role,
                 'password' => bcrypt($request->password)
             ]);
+            // dd($user_get);
+
                    Log::info('User created: ', ['user' => $user_get]);
 
             // $user_getに新しいユーザーの情報が格納される　$user_getがnullでないことを確認
@@ -155,15 +160,15 @@ dd($subjects);
                     Log::warning('Subjects are null for user: ', ['user' => $user]);
                     //subjectsの情報が見つからない場合
                     DB::rollback();
-                    return redirect('/register')->with('error', '科目情報が見つかりません。');
+                    return redirect('/register');
                 }
                 $user->subjects()->attach($subjects);
                 DB::commit();
                 return view('auth.login.login');
             } else {
-                Log::warning('User creation failed: user_get is null');
+                Log::warning('User creation failed: user_get is null'); //ユーザー作成が失敗した時
                 DB::rollback();
-                return redirect('/register')->with('error', 'ユーザーの作成に失敗しました。');
+                return redirect('/register');
             }
               }catch(\Exception $e){ //\Exception $e 例外処理 try-catchブロックを明確に区切る
                 // ログにエラーを記録

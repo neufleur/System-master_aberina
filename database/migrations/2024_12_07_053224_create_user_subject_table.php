@@ -15,8 +15,7 @@ class CreateUserSubjectTable extends Migration
     {
         //Schemaファサードは、データベーススキーマ操作（テーブルの作成、変更、削除など）を実行するために使用します。
         Schema::create('user_subject', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id'); // unsignedBigIntegerを使用
             $table->unsignedBigInteger('subject_id');
             $table->timestamps(); //created_atとupdated_atのタイムスタンプカラムを自動的に追加
