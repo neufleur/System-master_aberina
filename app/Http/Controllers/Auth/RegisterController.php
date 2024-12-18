@@ -63,64 +63,9 @@ class RegisterController extends Controller
 
     public function registerPost(Request $request)
     {
-         Log::info('Request data:', $request->all()); // これを追加してリクエストデータをログに記録
-     if ($request->isMethod ('post') ){
-
-        $rulus = [
-            'over_name' => 'required|max:10|string',
-            'under_name' => 'required|max:10|string',
-            'over_name_kana' => 'required|max:30|regex:/^[ァ-ヴーヶー]+$/u|string',
-            'under_name_kana' => 'required|max:30|regex:/^[ァ-ヴーヶー]+$/u|string',
-            'mail_address' => 'required|email|min:5|max:100|unique:users,mail_address',
-            'sex' => 'required|in:1,2,3',
-            'old_year'=> 'required||digits:4|before:'. Carbon:: today () ->toDateString(),
-            'old_month'=> 'required',
-            'old_day'=> 'required',
-            'role'=>'required|in:1,2,3,4',
-            'subjects' => 'array',
-            'password' =>'required|alpha_num|min:8|max:30|confirmed|string',
-                 ];
-        $message = [
-            'over_name.required'=>'名前は必ず入力してください。',
-            'over_name.max'=>'名前は10文字以下で入力してください。',
-            'under_name.required'=>'名前は必ず入力してください。',
-            'under_name.max'=>'名前は10文字以下で入力してください。',
-            'over_name_kana.required'=>'カタカナで必ず入力してください。',
-            'over_name_kana.max'=>'カタカナは30文字以下で入力してください。',
-            'over_name_kana.regex' => 'カタカナのみで入力してください。',
-            'under_name_kana.required'=>'カタカナで必ず入力してください。',
-            'under_name_kana.max'=>'カタカナは30文字以下で入力してください。',
-            'under_name_kana.regex' => 'カタカナのみで入力してください。',
-            'mail_address.required'=>'メールアドレスは入力必須です。',
-            'mail_address.email'=>'有効なメールアドレスを入力してください。',
-            'mail_address.unique:users,mail' =>'このメールアドレスは既に使われています。',
-            'mail_address.max'=>'メールアドレスは100文字以下で入力してください。',
-            'sex'=>'性別は必須項目です。',
-            'sex.in' => '選択された性別が無効です。',
-            'old_year.required' => '生年月日は必ず入力してください。',
-            'old_year.digits' => '生年月日は4桁の年で入力してください。',
-            'old_year.before' => '生年月日は今日より前の日付を入力してください。',
-            'old_month.required' => '月は必ず入力してください。',
-            'old_day.required' => '日は必ず入力してください。',
-            'role'=>'役職を選択してください。',
-            'subjects.required' => '科目は必須項目です。',
-            'password. required'=>'パスワードは入力必須です。',
-            'password.min'=>'パスワードは8文字以上、30文字以下で入力してください。',
-            'password.max'=>'パスワードは8文字以上、30文字以下で入力してください。',
-            'password.confirmed'=>'確認パスワードが一致していません。',
-            'password.alpha_num'=>'パスワードは英数字で入力してください。',
-                 ];
-
-                 $validate = Validator::make($request->all(), $rulus, $message, );//バリデーションを実行
-
-
-         if ($validate->fails ()) {
-            return redirect ('/register')
-            //エラーを返すか、エラーとともにリダイレクトする
-            -> withInput () // セッション()に入力値すべてを入れる
-            ->withErrors($validate);// セッション(errors）にエラーの情報を入れる
-            }try{
+        //  Log::info('Request data:', $request->all()); // これを追加してリクエストデータをログに記録
                 DB::beginTransaction(); //トランザクションとは、一連のデータベース操作がすべて成功するか、すべて失敗するかを保証するためのメカニズム
+                try{
                 $old_year = $request->old_year;
                 $old_month = $request->old_month;
                 $old_day = $request->old_day;
@@ -142,40 +87,14 @@ class RegisterController extends Controller
             ]);
             // dd($user_get);
 
-                   Log::info('User created: ', ['user' => $user_get]);
-
-            // $user_getに新しいユーザーの情報が格納される　$user_getがnullでないことを確認
-            //Log::infoを追加することで、プログラムがどのように実行されているかを詳細に追跡できるようになる
-            if ($user_get) {
-                $user = User::find($user_get->id);
-                if (!$user) {
-                    Log::warning('User not found after creation: ', ['user_id' => $user_get->id]);
-                    //$user_get->idを基に再取得した際に該当するユーザーが見つからなかった場合にこのログが記録される
-                    DB::rollback();
-                    return redirect('/register');
-                }
-                Log::info('User found: ', ['user' => $user]); //$userが正常に見つかった場合に、その情報をログに記録します。
-
-                if (!$subjects) {
-                    Log::warning('Subjects are null for user: ', ['user' => $user]);
-                    //subjectsの情報が見つからない場合
-                    DB::rollback();
-                    return redirect('/register');
-                }
-                $user->subjects()->attach($subjects);
-                DB::commit();
-                return view('auth.login.login');
-            } else {
-                Log::warning('User creation failed: user_get is null'); //ユーザー作成が失敗した時
-                DB::rollback();
-                return redirect('/register');
-            }
-              }catch(\Exception $e){ //\Exception $e 例外処理 try-catchブロックを明確に区切る
-                // ログにエラーを記録
-                Log::error('Error:', ['exception' => $e]);
-                DB::rollback(); //何らかのエラーが発生した場合、すべての変更を元に戻すためにロールバックします
-                return redirect()->route('loginView');
-        }
-    }
-}
+                //    Log::info('User created: ', ['user' => $user_get]);
+                   $user = User::findOrFail($user_get->id);
+                   $user->subjects()->attach($subjects);
+                   DB::commit();
+                   return view('auth.login.login');
+               }catch(\Exception $e){
+                   DB::rollback();
+                   return redirect()->route('loginView');
+               }
+           }
 }
