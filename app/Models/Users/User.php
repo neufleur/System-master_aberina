@@ -80,4 +80,10 @@ class User extends Authenticatable
     public function likePostId(){
         return Like::where('like_user_id', Auth::id());
     }
+
+//ログイン済み、且つadmin権限を持つユーザーのみが閲覧できるページを作成
+    public function isAdmin(): bool
+{
+    return $this->role_id === 1;
+}
 }

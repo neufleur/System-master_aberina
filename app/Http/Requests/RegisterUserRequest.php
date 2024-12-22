@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class RegisterUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -56,7 +56,7 @@ class RegisterRequest extends FormRequest
             'under_name_kana.regex' => 'カタカナのみで入力してください。',
             'mail_address.required'=>'メールアドレスは入力必須です。',
             'mail_address.email'=>'有効なメールアドレスを入力してください。',
-            'mail_address.unique:users,mail' =>'このメールアドレスは既に使われています。',
+            'mail_address.unique' =>'このメールアドレスは既に使われています。',
             'mail_address.max'=>'メールアドレスは100文字以下で入力してください。',
             'sex'=>'性別は必須項目です。',
             'sex.in' => '選択された性別が無効です。',

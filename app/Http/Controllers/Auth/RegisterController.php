@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\RegisterUserRequest;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Http\Request;
-use Carbon\Carbon;
 use DB;
 use App\Models\Users\Subjects;
 
