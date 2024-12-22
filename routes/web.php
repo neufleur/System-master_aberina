@@ -29,8 +29,8 @@ Route::group(['middleware' => 'auth'], function(){
 
         Route::middleware(['auth', 'checkRole'])->group(function () {
             // ここにadmin権限を持つユーザーのみが閲覧できるRouteの処理を書く
-            Route::get('/admin/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
-            Route::get('/admin/users', 'AdminController@users')->name('admin.users'); // 他の管理者専用ルート
+            Route::get('/admin/dashboard', 'AdminController@dashboard')->name('admin.dashboard'); //講師
+            Route::get('/admin/users', 'AdminController@users')->name('admin.users'); // 他の管理者専用ルート　生徒
         });
 
         Route::namespace('Calendar')->group(function(){

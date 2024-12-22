@@ -15,15 +15,17 @@ class CheckForMaintenanceMode extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        // 例: 'api/*',
     ];
 
-    public function handle(Request $request, Closure $next): Response
+    public function handle($request, Closure $next)
     {
-        if (auth()->check() && $request->user()->isAdmin()) {
-            return $next($request);
-        }
+           // メンテナンスモードチェックのロジック
+           if (app()->isDownForMaintenance() && !(auth()->check() && $request->user()->isAdmin()))
+            {
+                return new Response('Service is under maintenance.', 503);
+            }
+            return parent::handle($request, $next);
 
-        return abort(403, 'Unauthorized');
     }
 }
