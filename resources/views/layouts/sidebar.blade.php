@@ -20,12 +20,12 @@
     <div class="sidebar">
       @section('sidebar')
       <p><a href="{{ route('top.show') }}"><img src="{{ asset('image/home.png') }}" width="30px" height="30px">トップ</a></p>
-      <p><a href="/logout"><img src="{{ asset('image/logout.jpg') }}" width="30px" height="30px">ログアウト</a></p>
+      <p><a href="/logout"><img src="{{ asset('image/logout.png') }}" width="30px" height="30px">ログアウト</a></p>
       <p><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}"><img src="{{ asset('image/booking.png') }}" width="30px" height="30px">スクール予約</a></p>
       <p><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}"><img src="{{ asset('image/booked.png') }}" width="30px" height="30px">スクール予約確認</a></p>
       <p><a href="{{ route('calendar.admin.setting',['user_id' => Auth::id()]) }}"><img src="{{ asset('image/register.png') }}" width="35px" height="30px">スクール枠登録</a></p>
-      <p><a href="{{ route('post.show') }}"><img src="{{ asset('image/board.png') }}" width="70px" height="70px">掲示板</a></p>
-      <p><a href="{{ route('user.show') }}"><img src="{{ asset('image/user.png') }}" width="30px" height="30px">ユーザー検索</a></p>
+      <p><a href="{{ route('post.show') }}"><img src="{{ asset('image/board.png') }}" width="30px" height="30px">掲示板</a></p>
+      <p><a href="{{ route('user.show') }}"><img src="{{ asset('image/search.png') }}" width="30px" height="30px">ユーザー検索</a></p>
       @show
     </div>
     <div class="main-container">
