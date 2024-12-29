@@ -26,6 +26,7 @@ class PostEditRequest extends FormRequest
         return [
             'post_title' => 'required|max:100|string',
             'post_body' => 'required|max:5000|string',
+            'post_id' => 'required|exists:posts,id',
         ];
     }
 

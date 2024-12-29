@@ -52,7 +52,7 @@ class PostsController extends Controller
         $post = Post::create([
             'user_id' => Auth::id(),
             'post_title' => $request->post_title,
-            'post' => $request->post_body
+            'post_body' => $request->post_body
         ]);
         return redirect()->route('post.show');
     }
@@ -60,7 +60,7 @@ class PostsController extends Controller
     public function postEdit(Request $request){
         Post::where('id', $request->post_id)->update([
             'post_title' => $request->post_title,
-            'post' => $request->post_body,
+            'post_body' => $request->post_body,
         ]);
         return redirect()->route('post.detail', ['id' => $request->post_id]);
     }

@@ -56,6 +56,16 @@
   <div class="modal__bg js-modal-close"></div>
   <div class="modal__content">
     <form action="{{ route('post.edit') }}" method="post">
+    @csrf
+    @if($errors->any())
+         <div class="alert alert-danger">
+           <ul>
+               @foreach($errors->all() as $error)
+             <li>{{ $error }}</li>
+               @endforeach
+            </ul>
+         </div>
+         @endif
       <div class="w-100">
         <div class="modal-inner-title w-50 m-auto">
           <input type="text" name="post_title" placeholder="タイトル" class="w-100">
