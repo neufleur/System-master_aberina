@@ -49,10 +49,12 @@ class PostsController extends Controller
     }
 
     public function postCreate(PostFormRequest $request){
+        //dd($request->all());
         $post = Post::create([
             'user_id' => Auth::id(),
             'post_title' => $request->post_title,
-            'post_body' => $request->post_body
+            'post_body' => $request->post_body,
+            'post' => '',
         ]);
         return redirect()->route('post.show');
     }
