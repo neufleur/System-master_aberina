@@ -26,9 +26,8 @@ Route::group(['middleware' => 'auth'], function(){
             Route::get('/logout', 'TopsController@logout');
             Route::get('/top', 'TopsController@show')->name('top.show');
         });
-
-        Route::middleware(['auth', 'checkRole:admin'])->group(function () {
-            // ここにadmin権限を持つユーザーのみが閲覧できるRouteの処理を書く
+//⑤　管理者または特定の役割を持つユーザーがアクセスできる管理用のダッシュボードを表示するためのルート
+        Route::middleware(['auth', 'checkRole:teacher'])->group(function () {
             Route::get('/admin/dashboard', 'AdminController@dashboard')->name('admin.dashboard'); //講師
             Route::get('/admin/users', 'AdminController@users')->name('admin.users'); // 他の管理者専用ルート　生徒
         });

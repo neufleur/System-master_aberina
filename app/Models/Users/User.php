@@ -81,9 +81,12 @@ class User extends Authenticatable
         return Like::where('like_user_id', Auth::id());
     }
 
-//ログイン済み、且つadmin権限を持つユーザーのみが閲覧できるページを作成
-    public function isAdmin(): bool
-{
-    return $this->role_id === 1;
+//ログイン済み、且つadmin権限を持つユーザーのみが閲覧できるページを作成⓵
+public function isTeacher() {
+   return in_array($this->role, [1, 2, 3]); // 教師の役職を配列で定義
+}
+
+public function isAdmin() {
+    return $this->role === 4;
 }
 }

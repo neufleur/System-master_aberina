@@ -19,11 +19,14 @@
   <div class="d-flex">
     <div class="sidebar">
       @section('sidebar')
-      <p><a href="{{ route('top.show') }}"><img src="{{ asset('image/home.png') }}" width="35px" height="35px">トップ</a></p>
+      <p><a href="{{ route('top.show') }}"><img src="{{ asset('image/home.png') }}" width="35px" height="35px">マイページ</a></p>
       <p><a href="/logout"><img src="{{ asset('image/logout.png') }}" width="30px" height="30px">ログアウト</a></p>
       <p><a href="{{ route('calendar.general.show',['user_id' => Auth::id()]) }}"><img src="{{ asset('image/booking.png') }}" width="25px" height="25px">スクール予約</a></p>
+<!-- ⓶ログインユーザーが講師である時に表示させる文章をif文で作成 -->
+      @if (Auth::check() && Auth::user()->isTeacher())
       <p><a href="{{ route('calendar.admin.show',['user_id' => Auth::id()]) }}"><img src="{{ asset('image/booked.png') }}" width="25px" height="25px">スクール予約確認</a></p>
       <p><a href="{{ route('calendar.admin.setting',['user_id' => Auth::id()]) }}"><img src="{{ asset('image/register.png') }}" width="25px" height="25px">スクール枠登録</a></p>
+      @endif
       <p><a href="{{ route('post.show') }}"><img src="{{ asset('image/board.png') }}" width="27px" height="27px">掲示板</a></p>
       <p><a href="{{ route('user.show') }}"><img src="{{ asset('image/search.png') }}" width="30px" height="30px">ユーザー検索</a></p>
       @show

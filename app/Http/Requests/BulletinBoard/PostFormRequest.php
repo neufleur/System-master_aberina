@@ -24,16 +24,16 @@ class PostFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'post_title' => 'min:4|max:50',
-            'post_body' => 'min:10|max:500',
+            'post_title' => 'required|max:100|string',
+            'post_body' => 'required|max:500|string',
         ];
     }
 
     public function messages(){
         return [
-            'post_title.min' => 'タイトルは4文字以上入力してください。',
-            'post_title.max' => 'タイトルは50文字以内で入力してください。',
-            'post_body.min' => '内容は10文字以上入力してください。',
+            'post_title.required' => 'タイトルは入力必須です。',
+            'post_title.max' => 'タイトルは100文字以内で入力してください。',
+            'post_body.required' => '投稿内容は入力必須です。',
             'post_body.max' => '最大文字数は500文字です。',
         ];
     }

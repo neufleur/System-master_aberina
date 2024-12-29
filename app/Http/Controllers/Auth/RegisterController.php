@@ -77,7 +77,7 @@ class RegisterController extends Controller
                 'mail_address' => $request->mail_address,
                 'sex' => $request->sex,
                 'birth_day' => $birth_day,
-                'role' => $request->role,
+                'role' => $request->teacher,
                 'password' => bcrypt($request->password)
             ]);
             // dd($user_get);
