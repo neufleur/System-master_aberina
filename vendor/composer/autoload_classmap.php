@@ -45,7 +45,7 @@ return array(
     'App\\Models\\Calendars\\ReserveSettings' => $baseDir . '/app/Models/Calendars/ReserveSettings.php',
     'App\\Models\\Categories\\MainCategory' => $baseDir . '/app/Models/Categories/MainCategory.php',
     'App\\Models\\Categories\\SubCategory' => $baseDir . '/app/Models/Categories/SubCategory.php',
-    'App\\Models\\Posts\\Like' => $baseDir . '/app/Models/Posts/Like.php',
+    'App\\Models\\Like' => $baseDir . '/app/Models/Like.php',
     'App\\Models\\Posts\\Post' => $baseDir . '/app/Models/Posts/Post.php',
     'App\\Models\\Posts\\PostComment' => $baseDir . '/app/Models/Posts/PostComment.php',
     'App\\Models\\Users\\Subjects' => $baseDir . '/app/Models/Users/Subjects.php',

@@ -458,7 +458,7 @@ class ComposerStaticInite8fd1712de826aad53f5add106203fa9
         'App\\Models\\Calendars\\ReserveSettings' => __DIR__ . '/../..' . '/app/Models/Calendars/ReserveSettings.php',
         'App\\Models\\Categories\\MainCategory' => __DIR__ . '/../..' . '/app/Models/Categories/MainCategory.php',
         'App\\Models\\Categories\\SubCategory' => __DIR__ . '/../..' . '/app/Models/Categories/SubCategory.php',
-        'App\\Models\\Posts\\Like' => __DIR__ . '/../..' . '/app/Models/Posts/Like.php',
+        'App\\Models\\Like' => __DIR__ . '/../..' . '/app/Models/Like.php',
         'App\\Models\\Posts\\Post' => __DIR__ . '/../..' . '/app/Models/Posts/Post.php',
         'App\\Models\\Posts\\PostComment' => __DIR__ . '/../..' . '/app/Models/Posts/PostComment.php',
         'App\\Models\\Users\\Subjects' => __DIR__ . '/../..' . '/app/Models/Users/Subjects.php',

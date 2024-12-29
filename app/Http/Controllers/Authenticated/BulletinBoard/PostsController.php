@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Categories\MainCategory;
 use App\Models\Categories\SubCategory;
 use App\Models\Posts\Post;
-use App\Models\Posts\PostComment;
-use App\Models\Posts\Like;
-use App\Models\Users\User;
+use App\Models\PostComment;
+use App\Models\Like;
+use App\Models\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -115,7 +115,7 @@ class PostsController extends Controller
         $like->like_post_id = $post_id;
         $like->save();
 
-        return response()->json();
+        return response()->json(['success' => true]);
     }
 
     public function postUnLike(Request $request){
@@ -128,6 +128,6 @@ class PostsController extends Controller
              ->where('like_post_id', $post_id)
              ->delete();
 
-        return response()->json();
+        return response()->json(['success' => true]);
     }
 }

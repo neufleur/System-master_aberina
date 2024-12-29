@@ -84,12 +84,12 @@ class User extends Authenticatable
     }
 //いいね
     public function likes() {
-         return $this->hasMany(Like::class);
+         return $this->hasMany(Like::class,'like_user_id');
         }
          //この投稿に対して既にlikeしたかどうかを判別する
     public function isLike($postId)
     {
-      return $this->likes()->where('post_id',$postId)->exists();
+      return $this->likes()->where('like_post_id',$postId)->exists();
     }
 
     //isLikeを使って、既にlikeしたか確認したあと、いいねする（重複させない）

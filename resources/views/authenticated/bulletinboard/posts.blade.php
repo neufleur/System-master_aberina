@@ -14,13 +14,12 @@
             <i class="fa fa-comment"></i><span class=""></span>
           </div>
           <div>
-          @foreach($posts as $post)
-            @if(Auth::user()->isLike($post->id))
-            <p class="m-0">{{  Auth::user()->likes()->count() }}<i class="fas fa-heart un_like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}"></span></p>
+          <p class="m-0">
+          @if(Auth::user()->isLike($post->id))
+          <p class="m-0"><i class="fas fa-heart un_like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}"></span>{{ $post->like_count }}</p>
             @else
-            <p class="m-0">{{  Auth::user()->likes()->count() }}<i class="fas fa-heart like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}"></span></p>
+            <p class="m-0"><i class="fas fa-heart like_btn" post_id="{{ $post->id }}"></i><span class="like_counts{{ $post->id }}"></span>{{ $post->like_count }}</p>
             @endif
-            @endforeach
           </div>
         </div>
       </div>
