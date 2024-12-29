@@ -23,6 +23,7 @@ class PostEditRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             'post_title' => 'required|max:100|string',
             'post_body' => 'required|max:5000|string',

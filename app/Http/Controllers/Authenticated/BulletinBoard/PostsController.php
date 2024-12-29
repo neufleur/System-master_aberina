@@ -58,10 +58,13 @@ class PostsController extends Controller
     }
 
     public function postEdit(Request $request){
+
         Post::where('id', $request->post_id)->update([
             'post_title' => $request->post_title,
             'post_body' => $request->post_body,
         ]);
+        //dd($request->post_title);
+        //dd($request->post_body);
         return redirect()->route('post.detail', ['id' => $request->post_id]);
     }
 
