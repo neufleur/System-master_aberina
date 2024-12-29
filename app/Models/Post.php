@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Models\Posts;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+
 
 class Post extends Model
 {
@@ -20,11 +21,11 @@ class Post extends Model
     ];
 
     public function user(){
-        return $this->belongsTo('App\Models\Users\User');
+        return $this->belongsTo(User::class);
     }
 
     public function postComments(){
-        return $this->hasMany('App\Models\Posts\PostComment');
+        return $this->hasMany(PostComment::class);
     }
 
     public function subCategories(){
@@ -36,7 +37,7 @@ class Post extends Model
         return Post::with('postComments')->find($post_id)->postComments();
     }
 
-    public function likes() {
-        return $this->hasMany(Like::class);
-    }
+    // public function likes() {
+        // return $this->hasMany(Like::class);
+    // }
 }
