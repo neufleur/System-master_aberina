@@ -442,6 +442,7 @@ class ComposerStaticInite8fd1712de826aad53f5add106203fa9
         'App\\Http\\Controllers\\Authenticated\\Top\\TopsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Authenticated/Top/TopsController.php',
         'App\\Http\\Controllers\\Authenticated\\Users\\UsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/Authenticated/Users/UsersController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\LikeController' => __DIR__ . '/../..' . '/app/Http/Controllers/LikeController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',

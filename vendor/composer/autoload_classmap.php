@@ -29,6 +29,7 @@ return array(
     'App\\Http\\Controllers\\Authenticated\\Top\\TopsController' => $baseDir . '/app/Http/Controllers/Authenticated/Top/TopsController.php',
     'App\\Http\\Controllers\\Authenticated\\Users\\UsersController' => $baseDir . '/app/Http/Controllers/Authenticated/Users/UsersController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\LikeController' => $baseDir . '/app/Http/Controllers/LikeController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\CheckForMaintenanceMode' => $baseDir . '/app/Http/Middleware/CheckForMaintenanceMode.php',

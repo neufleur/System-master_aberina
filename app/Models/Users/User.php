@@ -7,8 +7,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Like;
 
-use App\Models\Posts\Like;
+
+
 use Auth;
 
 class User extends Authenticatable
@@ -74,11 +76,40 @@ class User extends Authenticatable
 
     // いいねしているかどうか
     public function is_Like($post_id){
-        return Like::where('like_user_id', Auth::id())->where('like_post_id', $post_id)->first(['likes.id']);
+        return Like::where('user_id', Auth::id())->where('post_id', $post_id)->first(['id']);
     }
 
     public function likePostId(){
         return Like::where('like_user_id', Auth::id());
+    }
+//いいね
+    public function likes() {
+         return $this->hasMany(Like::class);
+        }
+         //この投稿に対して既にlikeしたかどうかを判別する
+    public function isLike($postId)
+    {
+      return $this->likes()->where('post_id',$postId)->exists();
+    }
+
+    //isLikeを使って、既にlikeしたか確認したあと、いいねする（重複させない）
+    public function like($postId)
+    {
+      if($this->isLike($postId)){
+        //もし既に「いいね」していたら何もしない
+      } else {
+        $this->likes()->attach($postId);
+      }
+    }
+
+    //isLikeを使って、既にlikeしたか確認して、もししていたら解除する
+    public function unlike($postId)
+    {
+      if($this->isLike($postId)){
+        //もし既に「いいね」していたら消す
+        $this->likes()->detach($postId);
+      } else {
+      }
     }
 
 //ログイン済み、且つadmin権限を持つユーザーのみが閲覧できるページを作成⓵

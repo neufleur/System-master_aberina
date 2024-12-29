@@ -11,7 +11,7 @@ use App\Models\Posts\PostComment;
 use App\Models\Posts\Like;
 use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -34,6 +34,10 @@ class PostsController extends Controller
         }else if($request->my_posts){
             $posts = Post::with('user', 'postComments')
             ->where('user_id', Auth::id())->get();
+        }
+        // ここで各投稿の「いいね」数を取得
+        foreach ($posts as $post) {
+            $post->like_count = Like::likeCounts($post->id);
         }
         return view('authenticated.bulletinboard.posts', compact('posts', 'categories', 'like', 'post_comment'));
     }
