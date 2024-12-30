@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\Users;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\Users\User;
+use App\Models\User;
 
 class Subjects extends Model
 {
