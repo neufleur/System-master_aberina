@@ -11,15 +11,15 @@
       <div class="post_bottom_area d-flex">
         <div class="d-flex post_status">
           <div class="mr-5">
-            <i class="fa fa-comment"></i><span class=""></span>
+            <i class="fa fa-comment"></i><span class="">{{ $post->comments_count }}</span>
           </div>
           <div>
           <p class="m-0">
           <form action="{{ Auth::user()->isLike($post->id) ? route('post.unlike', $post->id) : route('post.like', $post->id) }}" method="POST"> 
-            @csrf 
+            @csrf
             <input type="hidden" name="post_id" value="{{ $post->id }}">
             <button type="submit" class="btn btn-link p-0 m-0 align-baseline">
-              <i class="fas fa-heart"></i>
+              <i class="fas fa-heart" style="color: #d32f2f"></i>
             </button>
           </form>
             </span>{{ $post->like_count }}</p>

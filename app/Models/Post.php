@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Users\User;
-use App\Models\Users\PostComment;
+use App\Models\Posts\PostComment;
 
 class Post extends Model
 {
@@ -26,8 +26,9 @@ class Post extends Model
         //return $this->belongsTo('App\Models\Users\User');
     }
 
+    //一対多　コメント数表示　PostCommentから呼び出す
     public function postComments(){
-        return $this->hasMany('App\Models\Posts\PostComment');
+        return $this->hasMany(PostComment::class);
     }
 
     public function subCategories(){
@@ -39,7 +40,5 @@ class Post extends Model
         return Post::with('postComments')->find($post_id)->postComments();
     }
 
-    // public function likes() {
-        // return $this->hasMany(Like::class);
-    // }
+
 }

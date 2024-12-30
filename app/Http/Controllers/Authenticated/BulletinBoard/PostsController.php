@@ -8,7 +8,7 @@ use App\Models\Categories\MainCategory;
 use App\Models\Categories\SubCategory;
 use App\Models\Post; // ここで Post クラスをインポート
 use App\Models\Users\User;
-use App\Models\PostComment;
+use App\Models\Posts\PostComment;
 use App\Models\Like;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -36,10 +36,12 @@ class PostsController extends Controller
             $posts = Post::with('user', 'postComments')
             ->where('user_id', Auth::id())->get();
         }
-        // ここで各投稿の「いいね」数を取得
+        // ここで各投稿の「いいね」数 コメント数を取得　コメント数Post.phpで指定したメソッドpostComments
         foreach ($posts as $post) {
             $post->like_count = Like::likeCounts($post->id);
+            $post->comments_count = $post->postComments()->count();
         }
+
         return view('authenticated.bulletinboard.posts', compact('posts', 'categories', 'like', 'post_comment'));
     }
 
