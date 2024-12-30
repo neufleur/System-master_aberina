@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Authenticated\Calendar\Admin;
 
 use App\Http\Controllers\Controller;
 

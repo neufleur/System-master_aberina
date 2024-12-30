@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Gate;
-use App\Models\Users\User;
-use App\Models\Users\Subjects;
+use App\Models\User;
+use App\Models\Subjects;
 use App\Searchs\DisplayUsers;
 use App\Searchs\SearchResultFactories;
 

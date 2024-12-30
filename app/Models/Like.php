@@ -9,8 +9,8 @@ class Like extends Model
 {
 
     protected $fillable = [
-        'like_user_id', // user_id に修正
-        'like_post_id', // post_id に修正
+        'like_user_id',
+        'like_post_id',
 ];
     //多対多のリレーション　間テーブルと繋げる　
     public function posts()

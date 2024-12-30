@@ -4,7 +4,7 @@ namespace App\Models\Posts;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\Users\User;
+use App\Models\User;
 
 class PostComment extends Model
 {
@@ -18,10 +18,11 @@ class PostComment extends Model
     ];
 
     public function post(){
-        return $this->belongsTo('App\Models\Posts\Post');
+        return $this->belongsTo(Post::class);
     }
 
     public function commentUser($user_id){
         return User::where('id', $user_id)->first();
     }
 }
+

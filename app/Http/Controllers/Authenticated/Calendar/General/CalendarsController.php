@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Calendars\General\CalendarView;
 use App\Models\Calendars\ReserveSettings;
 use App\Models\Calendars\Calendar;
-use App\Models\USers\User;
+use App\Models\User;
 use Auth;
 use DB;
 

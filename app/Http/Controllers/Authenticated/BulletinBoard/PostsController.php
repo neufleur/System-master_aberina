@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Categories\MainCategory;
 use App\Models\Categories\SubCategory;
-use App\Models\Posts\Post;
+use App\Models\Post;
 use App\Models\PostComment;
 use App\Models\Like;
 use App\Models\User;
@@ -105,9 +105,9 @@ class PostsController extends Controller
         return view('authenticated.bulletinboard.post_like', compact('posts', 'like'));
     }
 
-    public function postLike(Request $request){
+    public function postLike(Request $request,$id){
         $user_id = Auth::id();
-        $post_id = $request->post_id;
+        $post_id = $id;
 
         $like = new Like;
 
@@ -115,12 +115,12 @@ class PostsController extends Controller
         $like->like_post_id = $post_id;
         $like->save();
 
-        return response()->json(['success' => true]);
+        return redirect()->back();
     }
 
-    public function postUnLike(Request $request){
+    public function postUnLike(Request $request,$id){
         $user_id = Auth::id();
-        $post_id = $request->post_id;
+        $post_id = $id;
 
         $like = new Like;
 
@@ -128,6 +128,7 @@ class PostsController extends Controller
              ->where('like_post_id', $post_id)
              ->delete();
 
-        return response()->json(['success' => true]);
+             return redirect()->back();
     }
 }
+
