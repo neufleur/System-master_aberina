@@ -459,7 +459,10 @@ class ComposerStaticInite8fd1712de826aad53f5add106203fa9
         'App\\Models\\Categories\\MainCategory' => __DIR__ . '/../..' . '/app/Models/Categories/MainCategory.php',
         'App\\Models\\Categories\\SubCategory' => __DIR__ . '/../..' . '/app/Models/Categories/SubCategory.php',
         'App\\Models\\Like' => __DIR__ . '/../..' . '/app/Models/Like.php',
+<<<<<<< HEAD
         'App\\Models\\Post' => __DIR__ . '/../..' . '/app/Models/Post.php',
+=======
+>>>>>>> ed7b4911300974abbdfcf9e161b533ea8b9d4a40
         'App\\Models\\Posts\\PostComment' => __DIR__ . '/../..' . '/app/Models/Posts/PostComment.php',
         'App\\Models\\Subjects' => __DIR__ . '/../..' . '/app/Models/Subjects.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
