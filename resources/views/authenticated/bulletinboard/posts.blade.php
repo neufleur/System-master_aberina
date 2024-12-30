@@ -23,7 +23,6 @@
             </button>
           </form>
             </span>{{ $post->like_count }}</p>
-            @endif
           </div>
         </div>
       </div>

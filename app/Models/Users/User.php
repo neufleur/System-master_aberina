@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Models\Users\User;
+namespace App\Models\Users;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Like;
 
 class User extends Authenticatable
 {

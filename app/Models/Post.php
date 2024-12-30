@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Users\User;
-
+use App\Models\Users\PostComment;
 
 class Post extends Model
 {
@@ -23,10 +23,11 @@ class Post extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
+        //return $this->belongsTo('App\Models\Users\User');
     }
 
     public function postComments(){
-        return $this->hasMany(PostComment::class);
+        return $this->hasMany('App\Models\Posts\PostComment');
     }
 
     public function subCategories(){
