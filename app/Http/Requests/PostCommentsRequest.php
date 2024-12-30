@@ -13,7 +13,8 @@ class PostCommentsRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        //コメントのリクエストが許可
+        return true;
     }
 
     /**
@@ -25,14 +26,14 @@ class PostCommentsRequest extends FormRequest
     {
 
         return [
-            'post_comments' => 'required|max:250|string',
+            'comment' => 'required|max:250|string',
         ];
     }
 
     public function messages(){
         return [
-            'post_comments.required' => 'コメントは入力必須です。',
-            'post_comments.max' => 'コメントは250文字以内で入力してください。',
+            'comment.required' => 'コメントは入力必須です。',
+            'comment.max' => 'コメントは250文字以内で入力してください。',
         ];
     }
 }

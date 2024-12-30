@@ -19,6 +19,7 @@ class Post extends Model
         'post_title',
         'post_body',
         'post',
+        'comment',
     ];
 
     public function user(){

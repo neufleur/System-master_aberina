@@ -12,9 +12,13 @@ use App\Models\Posts\PostComment;
 use App\Models\Like;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PostCommentsRequest;
 
 class PostsController extends Controller
 {
+
+     //public function 関数(引数)引数　とは関数に渡して処理の中でその値を使うことができるもの
+
     public function show(Request $request){
         $posts = Post::with('user', 'postComments')->get();
         $categories = MainCategory::get();
@@ -86,13 +90,16 @@ class PostsController extends Controller
         return redirect()->route('post.input');
     }
 
-    public function commentCreate(Request $request){
+    public function commentCreate(PostCommentsRequest $request){
+        //引数PostCommentsRequestの中からrequest
+        $validatedData = $request->validated();
         PostComment::create([
             'post_id' => $request->post_id,
             'user_id' => Auth::id(),
-            'post_comments' => $request->post_comments
+            'comment' => $validatedData['comment'],
         ]);
         return redirect()->route('post.detail', ['id' => $request->post_id]);
+        //リダイレクト先となるルートに付けられた名前 post.detail'  ['id' => $request->post_id] は、ルートパラメータに値を渡している
     }
 
     public function myBulletinBoard(){
