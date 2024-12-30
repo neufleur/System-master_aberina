@@ -90,7 +90,7 @@ class PostsController extends Controller
         PostComment::create([
             'post_id' => $request->post_id,
             'user_id' => Auth::id(),
-            'comment' => $request->comment
+            'post_comments' => $request->post_comments
         ]);
         return redirect()->route('post.detail', ['id' => $request->post_id]);
     }
