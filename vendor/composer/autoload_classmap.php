@@ -46,13 +46,10 @@ return array(
     'App\\Models\\Categories\\MainCategory' => $baseDir . '/app/Models/Categories/MainCategory.php',
     'App\\Models\\Categories\\SubCategory' => $baseDir . '/app/Models/Categories/SubCategory.php',
     'App\\Models\\Like' => $baseDir . '/app/Models/Like.php',
-<<<<<<< HEAD
     'App\\Models\\Post' => $baseDir . '/app/Models/Post.php',
-=======
->>>>>>> ed7b4911300974abbdfcf9e161b533ea8b9d4a40
     'App\\Models\\Posts\\PostComment' => $baseDir . '/app/Models/Posts/PostComment.php',
     'App\\Models\\Subjects' => $baseDir . '/app/Models/Subjects.php',
-    'App\\Models\\User' => $baseDir . '/app/Models/User.php',
+    'App\\Models\\Users\\User' => $baseDir . '/app/Models/Users/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

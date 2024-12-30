@@ -1,7 +1,7 @@
 <?php
 namespace App\Searchs;
 
-use App\Models\User;
+use App\Models\Users\User;
 
 class SelectNameDetails implements DisplayUsers{
 

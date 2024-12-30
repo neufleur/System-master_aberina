@@ -1,7 +1,7 @@
 <?php
 namespace App\Calendars\Admin;
 use Carbon\Carbon;
-use App\Models\User;
+use App\Models\Users\User;
 
 class CalendarView{
   private $carbon;

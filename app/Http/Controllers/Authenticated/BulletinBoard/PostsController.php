@@ -6,11 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Categories\MainCategory;
 use App\Models\Categories\SubCategory;
-<<<<<<< HEAD
-use App\Models\Post;
-=======
 use App\Models\Post; // ここで Post クラスをインポート
->>>>>>> ed7b4911300974abbdfcf9e161b533ea8b9d4a40
+use App\Models\Users\User;
 use App\Models\PostComment;
 use App\Models\Like;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
@@ -23,6 +20,7 @@ class PostsController extends Controller
         $categories = MainCategory::get();
         $like = new Like;
         $post_comment = new Post;
+        $user = new User;
         if(!empty($request->keyword)){
             $posts = Post::with('user', 'postComments')
             ->where('post_title', 'like', '%'.$request->keyword.'%')
