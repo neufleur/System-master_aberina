@@ -9,8 +9,9 @@ use App\Models\Calendars\ReserveSettings;
 use App\Models\Calendars\Calendar;
 use App\Models\Users\User;
 use Auth;
+use Carbon\Carbon;
 use DB;
-
+//スクール予約画面
 class CalendarsController extends Controller
 {
     public function show(){
@@ -35,4 +36,5 @@ class CalendarsController extends Controller
         }
         return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
     }
+
 }

@@ -13,6 +13,7 @@ use App\Models\Like;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostCommentsRequest;
+use App\Http\Requests\PostEditRequest;
 
 class PostsController extends Controller
 {
@@ -70,7 +71,7 @@ class PostsController extends Controller
         return redirect()->route('post.show');
     }
 
-    public function postEdit(Request $request){
+    public function postEdit(PostEditRequest $request){
 
         Post::where('id', $request->post_id)->update([
             'post_title' => $request->post_title,
@@ -114,7 +115,7 @@ class PostsController extends Controller
         $like = new Like;
         return view('authenticated.bulletinboard.post_like', compact('posts', 'like'));
     }
-
+//いいねする
     public function postLike(Request $request,$id){
         $user_id = Auth::id();
         $post_id = $id;
@@ -127,7 +128,7 @@ class PostsController extends Controller
 
         return redirect()->back();
     }
-
+//いいね外す
     public function postUnLike(Request $request,$id){
         $user_id = Auth::id();
         $post_id = $id;

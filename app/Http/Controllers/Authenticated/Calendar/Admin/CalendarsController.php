@@ -10,12 +10,14 @@ use App\Models\Calendars\ReserveSettings;
 use App\Models\Calendars\Calendar;
 use App\Models\Users\User;
 use Auth;
+use Carbon\Carbon;
 use DB;
-
+//スクール予約確認画面
 class CalendarsController extends Controller
 {
     public function show(){
         $calendar = new CalendarView(time());
+
         return view('authenticated.calendar.admin.calendar', compact('calendar'));
     }
 

@@ -28,5 +28,22 @@ class UsersTableSeeder extends Seeder
             ]
         ]);
 
+         //初期テーブル作成
+         DB::table('users')->insert([
+            [ 'over_name' => 'もも',
+            'under_name' => 'んが',
+            'over_name_kana' => 'モモ',
+            'under_name_kana' => 'ンガ',
+            'mail_address' => 'momo@icloud.com',
+            'sex' => 2,
+            'birth_day' => '1992-05-06',
+            'role' => 4,
+            'subjects'=> 1,
+            'password' => Hash::make('password123'),
+            'created_at' => now(),
+            'updated_at' => now(),
+            ]
+        ]);
+
     }
 }

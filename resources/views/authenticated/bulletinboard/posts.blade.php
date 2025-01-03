@@ -15,7 +15,8 @@
           </div>
           <div>
           <p class="m-0">
-          <form action="{{ Auth::user()->isLike($post->id) ? route('post.unlike', $post->id) : route('post.like', $post->id) }}" method="POST"> 
+            <!-- いいね機能追加 -->
+          <form action="{{ Auth::user()->isLike($post->id) ? route('post.unlike', $post->id) : route('post.like', $post->id) }}" method="POST">
             @csrf
             <input type="hidden" name="post_id" value="{{ $post->id }}">
             <button type="submit" class="btn btn-link p-0 m-0 align-baseline">

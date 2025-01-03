@@ -45,7 +45,8 @@
       </div>
       <div>
         @if($user->role == 4)
-        <span>選択科目 :</span>
+        <span>選択科目 </span><span>:{{ $user->subjects->pluck('subject')->implode(', ') }}</span>
+        <!-- subjectsリレーションからsubjectカラムを呼び出す　pluckは必要なカラムのデータだけ取り出せるメソッド(国語　数学などの配列を返す)　implode配列をカンマ区切りの文字列に変換する-->
         @endif
       </div>
     </div>
@@ -91,6 +92,12 @@
           </div>
           <div class="selected_engineer">
             <label>選択科目</label>
+              <!--subject 単数で表示  -->
+              <!-- <option selected disabled>----</option> -->
+              <span>国語</span><input type="checkbox" name="subjects" value="1" form="userSearchRequest">
+              <span>数学</span><input type="checkbox" name="subjects" value="2" form="userSearchRequest">
+              <span>英語</span><input type="checkbox" name="subjects" value="3" form="userSearchRequest">
+            </select>
           </div>
         </div>
       </div>

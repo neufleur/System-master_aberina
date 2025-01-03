@@ -6,6 +6,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Like;
+use App\Models\Subjects;
+
 
 class User extends Authenticatable
 {
@@ -66,6 +68,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Subjects::class, 'user_subject', 'user_id', 'subject_id');
         // return $this->belongsToMany('⓵Subjectsの場所', '⓶中間テーブル', '⓷自分のidが入る' ④相手モデルに関係しているid);
     }
+
+
     public function isLike($post_id) {
         return $this->likes()->where('like_post_id', $post_id)->exists();
     }

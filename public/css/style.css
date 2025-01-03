@@ -43,9 +43,11 @@ li{
 .day-sun{
   color:#FF0000;
 }
-.past-day{
-  background:#EEE;
+
+td.past-day {
+  background-color: #EEE;
 }
+
 .calendar-td{
   min-width:100px;
 }

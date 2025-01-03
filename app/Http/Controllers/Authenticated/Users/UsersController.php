@@ -20,10 +20,10 @@ class UsersController extends Controller
         $updown = $request->updown;
         $gender = $request->sex;
         $role = $request->role;
-        $subjects = null;// ここで検索時の科目を受け取る
+        $subjects = $request->subject; // ここで検索時の科目を受け取る
         $userFactory = new SearchResultFactories();
         $users = $userFactory->initializeUsers($keyword, $category, $updown, $gender, $role, $subjects);
-        $subjects = Subjects::all();
+        $subject = Subjects::all();
         return view('authenticated.users.search', compact('users', 'subjects'));
     }
 
@@ -37,5 +37,11 @@ class UsersController extends Controller
         $user = User::findOrFail($request->user_id);
         $user->subjects()->sync($request->subjects);
         return redirect()->route('user.profile', ['id' => $request->user_id]);
+    }
+    public function index()
+    {
+        // ユーザーと選択科目を取得
+        $users = User::with('subjects')->get();
+        return view('authenticated.users.index', compact('users'));
     }
 }

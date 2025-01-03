@@ -82,6 +82,7 @@
          @endif
       <div class="w-100">
         <div class="modal-inner-title w-50 m-auto">
+        <input type="hidden" class="edit-modal-hidden" name="post_id" value="{{ $post->id }}">
           <input type="text" name="post_title" placeholder="タイトル" class="w-100">
         </div>
         <div class="modal-inner-body w-50 m-auto pt-3 pb-3">

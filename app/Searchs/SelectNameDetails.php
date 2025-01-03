@@ -2,6 +2,8 @@
 namespace App\Searchs;
 
 use App\Models\Users\User;
+use App\Models\Subjects;
+
 
 class SelectNameDetails implements DisplayUsers{
 
@@ -17,6 +19,12 @@ class SelectNameDetails implements DisplayUsers{
     }else{
       $role = array($role);
     }
+    if(empty($subjects)){
+      $subjects = Subjects::pluck('id')->toArray(); //必要なカラムのデータだけ取り出す　Subject（ユーザーのsubject 単数）
+    }elseif (!is_array($subjects)) { //変数 $subjects が配列ではない場合に true を返す
+      $subjects = explode(',', $subjects); // explode(',', $subjects)subjects文字列の場合カンマで分割し、配列に変換 ['1', '2', '3']
+      //dd($subjects);
+    }
     $users = User::with('subjects')
     ->where(function($q) use ($keyword){
       $q->Where('over_name', 'like', '%'.$keyword.'%')
@@ -29,7 +37,7 @@ class SelectNameDetails implements DisplayUsers{
       ->whereIn('role', $role);
     })
     ->whereHas('subjects', function($q) use ($subjects){
-      $q->where('subjects.id', $subjects);
+      $q->whereIn('subjects.id', $subjects);
     })
     ->orderBy('over_name_kana', $updown)->get();
     return $users;
