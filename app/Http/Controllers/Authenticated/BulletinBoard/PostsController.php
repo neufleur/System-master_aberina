@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Categories\MainCategory;
 use App\Models\Categories\SubCategory;
-use App\Models\Post; // ここで Post クラスをインポート
-use App\Models\Users\User;
+use App\Models\Posts\Post; // ここで Post クラスをインポート
+use App\Models\User\Users;
 use App\Models\Posts\PostComment;
 use App\Models\Like;
 use App\Http\Requests\BulletinBoard\PostFormRequest;

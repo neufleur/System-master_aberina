@@ -4,7 +4,7 @@ namespace App\Models\Posts;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\Users\User;
+use App\Models\User\Users;
 
 class PostComment extends Model
 {
