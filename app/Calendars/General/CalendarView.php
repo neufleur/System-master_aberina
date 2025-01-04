@@ -60,21 +60,25 @@ class CalendarView{
             $reservePart = "リモ2部";
           }else if($reservePart == 3){
             $reservePart = "リモ3部";
-            $html[] = '<form action="/delete/calendar" method="post" id="deleteParts">'.csrf_field().'<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" form="deleteParts" value="'. $reservePart .'">'. $reservePart .'</button></form>';
-            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $reservePart .'">'. $reservePart .'</button>';
+            $html[] = '<form action="/delete/calendar" method="post" id="deleteParts">'.csrf_field();
+            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $reservePart->setting_reserve .'">'. $reservePart .'</button>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+            $html[] = '</form>';
           }
         } else {
-          $html[] = $day->selectPart($day->everyDay()); } $html[] = '</td>';
+          $html[] = '<form action="/reserve/calendar" method="post">'.csrf_field();
+          $html[] = $day->selectPart($day->everyDay());
+          $html[] = '</form>';
         }
+      }
       }
       $html[] = '</tr>';
     }
     $html[] = '</tbody>';
     $html[] = '</table>';
     $html[] = '</div>';
-    $html[] = '<form action="/reserve/calendar" method="post" id="reserveParts">'.csrf_field().'</form>';
-    $html[] = '<form action="/delete/calendar" method="post" id="deleteParts">'.csrf_field().'</form>';
+    // $html[] = '<form action="/reserve/calendar" method="post" id="reserveParts">'.csrf_field().'</form>';
+    // $html[] = '<form action="/delete/calendar" method="post" id="deleteParts">'.csrf_field().'</form>';
 
     return implode('', $html);
   }
