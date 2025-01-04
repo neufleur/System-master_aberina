@@ -1,8 +1,9 @@
 <?php
 namespace App\Calendars\Admin;
+//adminファイルは管理者のファイル
 use Carbon\Carbon;
 use App\Models\Calendars\ReserveSettings;
-
+//このファイルには、カレンダーの設定に関連するクラスやメソッドが含まれている。例えば、予約設定やカレンダーの基本的な構成を管理する機能　全体の設定を集中管理する役割がある
 class CalendarSettingView{
   private $carbon;
 
@@ -43,13 +44,18 @@ class CalendarSettingView{
             // 過ぎた日かどうかのチェック
             if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
               $html[] = '<td class="past-day border">';
-              $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">受付終了</p>';
+              $html[] = $day->render();
+              $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px; color: #888;">受付終了</p>';
+              $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+              $html[] = '</td>';
             } else {
               $html[] = '<td class="border '.$day->getClassName().'">';
-            }
-            $html[] = $day->render();
-            $html[] = '<div class="adjust-area">';
-
+              $html[] = $day->render();
+              $html[] = '<div class="adjust-area">';
+              $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+            }// リモ部の選択肢を表示
+            $html[] = $day->selectPart($day->everyDay());
+            
             // 過ぎた日の場合、入力欄をdisabledに
             if ($dayDate->lt($toDay)) {
                 $html[] = '<p class="d-flex m-0 p-0">1部<input class="w-25" style="height:20px;" name="reserve_day[' . $day->everyDay() . '][1]" type="text" form="reserveSetting" value="' . $day->onePartFrame($day->everyDay()) . '" disabled></p>';

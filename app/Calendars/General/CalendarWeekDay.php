@@ -4,7 +4,7 @@ namespace App\Calendars\General;
 use App\Models\Calendars\ReserveSettings;
 use Carbon\Carbon;
 use Auth;
-
+//このファイルには、週ごとの日付管理に関連するクラスやメソッドが含まれてる　各曜日の情報を管理し、日付ごとの操作やデータの取得を行う　例えば、特定の日付の予約状況を確認したり、特定の日付のスタイルを設定する機能がある
 class CalendarWeekDay{
   protected $carbon;
 
