@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use Gate;
 use App\Models\Users\User;
-use App\Models\Subjects;
+use App\Models\Users\Subjects;
 use App\Searchs\DisplayUsers;
 use App\Searchs\SearchResultFactories;
 
