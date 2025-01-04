@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Categories\MainCategory;
 use App\Models\Categories\SubCategory;
 use App\Models\Posts\Post; // ここで Post クラスをインポート
-use App\Models\User\Users;
+use App\Models\Users\User;
 use App\Models\Posts\PostComment;
 use App\Models\Posts\Like;
 use App\Http\Requests\BulletinBoard\PostFormRequest;

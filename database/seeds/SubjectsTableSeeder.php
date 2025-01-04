@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\User\Subjects;
+use App\Models\Users\Subjects;
 use Illuminate\Support\Facades\DB;
 
 class SubjectsTableSeeder extends Seeder

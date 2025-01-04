@@ -13,6 +13,7 @@ class Subjects extends Model
     protected $fillable = [
         'name','subject'
     ];
+    protected $table = 'subjects';
 
 //usersテーブルとsubjectsテーブルのリレーション
     public function users(){
