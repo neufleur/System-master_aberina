@@ -9,7 +9,7 @@ use App\Models\Categories\SubCategory;
 use App\Models\Posts\Post; // ここで Post クラスをインポート
 use App\Models\User\Users;
 use App\Models\Posts\PostComment;
-use App\Models\Like;
+use App\Models\Posts\Like;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostCommentsRequest;

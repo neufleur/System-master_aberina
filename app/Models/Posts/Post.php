@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Posts;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User\Users;
+use App\Models\Users\User;
 use App\Models\Posts\PostComment;
 
 class Post extends Model

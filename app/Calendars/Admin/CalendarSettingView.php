@@ -54,8 +54,9 @@ class CalendarSettingView{
               $html[] = '<div class="adjust-area">';
               $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
             }// リモ部の選択肢を表示
-            $html[] = $day->selectPart($day->everyDay());
-            
+            // $html[] = $day->selectPart($day->everyDay());
+            $dayDate = Carbon::parse($day->everyDay());  // 例えば、$day->everyDay() が 'Y-m-d' 形式の日付ならこれでCarbonインスタンスに変換される　　
+            // $toDay = Carbon::today();
             // 過ぎた日の場合、入力欄をdisabledに
             if ($dayDate->lt($toDay)) {
                 $html[] = '<p class="d-flex m-0 p-0">1部<input class="w-25" style="height:20px;" name="reserve_day[' . $day->everyDay() . '][1]" type="text" form="reserveSetting" value="' . $day->onePartFrame($day->everyDay()) . '" disabled></p>';

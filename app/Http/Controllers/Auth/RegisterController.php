@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User\Users;
+use App\Models\Users\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\RegisterUserRequest;
 use Illuminate\Support\Facades\Log;
 use DB;
-use App\Models\User\Subjects;
+use App\Models\Users\Subjects;
 
 class RegisterController extends Controller
 {
