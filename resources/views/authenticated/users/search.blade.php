@@ -45,7 +45,8 @@
       </div>
       <div>
         @if($user->role == 4)
-        <span>選択科目 </span><span>:{{ $user->subjects->pluck('subject')->implode(', ') }}</span>
+        <span>選択科目 </span>
+        <span>:{{ $user->subjects->pluck('subject')->implode(', ') }}</span>
         <!-- subjectsリレーションからsubjectカラムを呼び出す　pluckは必要なカラムのデータだけ取り出せるメソッド(国語　数学などの配列を返す)　implode配列をカンマ区切りの文字列に変換する-->
         @endif
       </div>

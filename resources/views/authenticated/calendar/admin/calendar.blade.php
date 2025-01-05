@@ -9,6 +9,12 @@
     <div class="w-75 m-auto border" style="border-radius:5px;">
     <p class="text-center">{{ $calendar->getTitle() }}</p>
     <p>{!! $calendar->render() !!}</p>
+    @if(session('reserved_dates'))
+    <ul> @foreach(session('reserved_dates') as $date)
+       <li>{{ $date }}</li>
+         @endforeach
+    </ul>
+    @endif
 
   </div>
 </div>
