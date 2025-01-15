@@ -38,7 +38,6 @@ class UsersTableSeeder extends Seeder
             'sex' => 2,
             'birth_day' => '1992-05-06',
             'role' => 4,
-            'subjects'=> 1,
             'password' => Hash::make('password123'),
             'created_at' => now(),
             'updated_at' => now(),
@@ -47,3 +46,5 @@ class UsersTableSeeder extends Seeder
 
     }
 }
+
+//実際のデータをseederで登録　php artisan migrate

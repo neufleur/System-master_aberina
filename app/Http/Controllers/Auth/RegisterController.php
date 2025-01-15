@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Users\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -11,7 +12,7 @@ use App\Http\Requests\RegisterUserRequest;
 use Illuminate\Support\Facades\Log;
 use DB;
 use App\Models\Users\Subjects;
-
+use Carbon\Carbon;
 class RegisterController extends Controller
 {
     /*
@@ -58,16 +59,15 @@ class RegisterController extends Controller
 
     public function registerPost(RegisterUserRequest $request)
     {
-        //  Log::info('Request data:', $request->all()); // これを追加してリクエストデータをログに記録
+
+        //Log::info('Request data:', $request->all()); // これを追加してリクエストデータをログに記録
                 DB::beginTransaction(); //トランザクションとは、一連のデータベース操作がすべて成功するか、すべて失敗するかを保証するためのメカニズム
                 try{
-                $old_year = $request->old_year;
-                $old_month = $request->old_month;
-                $old_day = $request->old_day;
-                $data = $old_year . '-' . $old_month . '-' . $old_day;
-                $birth_day = date('Y-m-d', strtotime($data));
+                // 年月日を1つの日付にまとめる
+                $birth_day = date('Y-m-d', strtotime($request->old_year . '-' . $request->old_month . '-' . $request->old_day));
                 $subjects = $request->subject;
-// dd($subjects);
+                // dd($request->all());
+            //    dd($birth_day);
             $user_get = User::create([
                 'over_name' => $request->over_name,
                 'under_name' => $request->under_name,
@@ -76,14 +76,14 @@ class RegisterController extends Controller
                 'mail_address' => $request->mail_address,
                 'sex' => $request->sex,
                 'birth_day' => $birth_day,
-                'role' => $request->teacher,
-                'password' => bcrypt($request->password)
+                'role' => $request->role,
+                'password' => bcrypt($request->password),
             ]);
+            // Log::info('User created:', ['user' => $user_get]);
             // dd($user_get);
 
-                //    Log::info('User created: ', ['user' => $user_get]);
                    $user = User::findOrFail($user_get->id);
-                   $user->subjects()->attach($subjects);
+                   $user->subjects()->attach($subjects); //$user=85行目のことを指す　subjects()はUser.phpに書かれている68行目のsubjectsメソッド　attachデーターを追加する
                    DB::commit();
                    return view('auth.login.login');
                }catch(\Exception $e){
