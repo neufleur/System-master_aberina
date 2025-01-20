@@ -14,16 +14,17 @@
             <i class="fa fa-comment"></i><span class="">{{ $post->comments_count }}</span>
           </div>
           <div>
-          <p class="m-0">
-            <!-- いいね機能追加 -->
-          <form action="{{ Auth::user()->isLike($post->id) ? route('post.unlike', $post->id) : route('post.like', $post->id) }}" method="POST">
-            @csrf
-            <input type="hidden" name="post_id" value="{{ $post->id }}">
-            <button type="submit" class="btn btn-link p-0 m-0 align-baseline">
-              <i class="fas fa-heart" style="color: #d32f2f"></i>
-            </button>
-          </form>
-            </span>{{ $post->like_count }}</p>
+
+            <!-- </span>{{ $post->like_count }}</p> -->
+            @if(Auth::user()->is_Like($post->id))
+            <p class="m-0"><i class="fas fa-heart un_like_btn" post_id="{{ $post->id }}"></i>
+            <span class="like_counts{{ $post->id }}">{{ $post->like_count }}</span>
+
+            @else
+            <p class="m-0"><i class="fas fa-heart like_btn" post_id="{{ $post->id }}"></i>
+            <span class="like_counts{{ $post->id }}">{{ $post->like_count }}</span>
+
+            @endif
           </div>
         </div>
       </div>

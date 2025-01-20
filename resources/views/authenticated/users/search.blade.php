@@ -95,9 +95,9 @@
             <label>選択科目</label>
               <!--subject 単数で表示  -->
               <!-- <option selected disabled>----</option> -->
-              <span>国語</span><input type="checkbox" name="subjects" value="1" form="userSearchRequest">
-              <span>数学</span><input type="checkbox" name="subjects" value="2" form="userSearchRequest">
-              <span>英語</span><input type="checkbox" name="subjects" value="3" form="userSearchRequest">
+              <span>国語</span><input type="checkbox" name="subjects[]" value="1" form="userSearchRequest">
+              <span>数学</span><input type="checkbox" name="subjects[]" value="2" form="userSearchRequest">
+              <span>英語</span><input type="checkbox" name="subjects[]" value="3" form="userSearchRequest">
             </select>
           </div>
         </div>

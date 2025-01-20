@@ -30,6 +30,7 @@ class User extends Authenticatable
         'sex',
         'birth_day',
         'role',
+        'subject',
         'password'
     ];
 
@@ -71,7 +72,7 @@ class User extends Authenticatable
     }
 
 
-    public function isLike($post_id) {
+    public function is_Like($post_id) {
         return $this->likes()->where('like_post_id', $post_id)->exists();
     }
 

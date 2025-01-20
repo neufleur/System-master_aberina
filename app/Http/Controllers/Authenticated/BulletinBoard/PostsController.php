@@ -66,7 +66,6 @@ class PostsController extends Controller
             'user_id' => Auth::id(),
             'post_title' => $request->post_title,
             'post_body' => $request->post_body,
-            'post' => '',
         ]);
         return redirect()->route('post.show');
     }
@@ -116,9 +115,10 @@ class PostsController extends Controller
         return view('authenticated.bulletinboard.post_like', compact('posts', 'like'));
     }
 //いいねする
-    public function postLike(Request $request,$id){
+    public function postLike(Request $request, Post $post){
         $user_id = Auth::id();
-        $post_id = $id;
+        $post_id = $request->post_id;
+        $post->likes()->attach(auth()->id());
 
         $like = new Like;
 
@@ -126,12 +126,13 @@ class PostsController extends Controller
         $like->like_post_id = $post_id;
         $like->save();
 
-        return redirect()->back();
+        return response()->json(); //json()は成功したレスポンスを返したい場合に使う
     }
 //いいね外す
-    public function postUnLike(Request $request,$id){
+    public function postUnLike(Request $request, Post $post){
         $user_id = Auth::id();
-        $post_id = $id;
+        $post_id = $request->post_id;
+        $post->likes()->detach(auth()->id());
 
         $like = new Like;
 
@@ -139,7 +140,7 @@ class PostsController extends Controller
              ->where('like_post_id', $post_id)
              ->delete();
 
-             return redirect()->back();
+             return response()->json();
     }
 }
 

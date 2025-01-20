@@ -24,8 +24,9 @@ class SelectNameDetails implements DisplayUsers{
       $subjects = Subjects::pluck('id')->toArray(); //必要なカラムのデータだけ取り出す　Subjects（ユーザーのsubjects）
     }elseif (!is_array($subjects)) { //変数 $subjects が配列ではない場合に true を返す
       $subjects = explode(',', $subjects); // explode(',', $subjects)subjects文字列の場合カンマで分割し、配列に変換 ['1', '2', '3']
-      dd($subjects);
     }
+
+
     $users = User::with('subjects')
     ->where(function($q) use ($keyword){
       $q->Where('over_name', 'like', '%'.$keyword.'%')
@@ -39,9 +40,12 @@ class SelectNameDetails implements DisplayUsers{
     })
     ->whereHas('subjects', function($q) use ($subjects){
       $q->whereIn('subjects.id', $subjects);
+
     })
     ->orderBy('over_name_kana', $updown)->get();
     return $users;
+
   }
+
 
 }
