@@ -22,7 +22,7 @@ const UPDATED_AT = null;
     }
     public static function likeCounts($like_post_id)
     {
-        return self::where('like_post_id', $like_post_id)->count();
+        return Like::where('like_post_id', $like_post_id)->count();
     }
 
    

@@ -118,7 +118,6 @@ class PostsController extends Controller
     public function postLike(Request $request, Post $post){
         $user_id = Auth::id();
         $post_id = $request->post_id;
-        $post->likes()->attach(auth()->id());
 
         $like = new Like;
 
@@ -132,7 +131,6 @@ class PostsController extends Controller
     public function postUnLike(Request $request, Post $post){
         $user_id = Auth::id();
         $post_id = $request->post_id;
-        $post->likes()->detach(auth()->id());
 
         $like = new Like;
 

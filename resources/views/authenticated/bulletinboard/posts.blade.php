@@ -14,15 +14,15 @@
             <i class="fa fa-comment"></i><span class="">{{ $post->comments_count }}</span>
           </div>
           <div>
-
+    
             <!-- </span>{{ $post->like_count }}</p> -->
             @if(Auth::user()->is_Like($post->id))
             <p class="m-0"><i class="fas fa-heart un_like_btn" post_id="{{ $post->id }}"></i>
-            <span class="like_counts{{ $post->id }}">{{ $post->like_count }}</span>
+            <span class="like_counts like_counts{{ $post->id }}">{{ $post->like_count }}</span>
 
             @else
             <p class="m-0"><i class="fas fa-heart like_btn" post_id="{{ $post->id }}"></i>
-            <span class="like_counts{{ $post->id }}">{{ $post->like_count }}</span>
+           <span class="like_counts like_counts{{ $post->id }}">{{ $post->like_count }}</span>
 
             @endif
           </div>

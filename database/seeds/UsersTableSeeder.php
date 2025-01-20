@@ -37,7 +37,7 @@ class UsersTableSeeder extends Seeder
             'mail_address' => 'momo@icloud.com',
             'sex' => 2,
             'birth_day' => '1992-05-06',
-            'role' => 3,
+            'role' => 4,
             'password' => Hash::make('password123'),
             'created_at' => now(),
             'updated_at' => now(),

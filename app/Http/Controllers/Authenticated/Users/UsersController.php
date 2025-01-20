@@ -9,7 +9,7 @@ use Gate;
 use App\Models\Users\User;
 use App\Models\Users\Subjects;
 use App\Searchs\DisplayUsers;
-use App\Searchs\SelectNameDetails;
+use App\Searchs\SearchResultFactories;
 
 class UsersController extends Controller
 {
@@ -22,8 +22,8 @@ class UsersController extends Controller
         $gender = $request->sex;
         $role = $request->role;
         $subjects = $request->subject; // ここで検索時の科目を受け取る
-        $search = new SelectNameDetails();
-        $users = $search->resultUsers($keyword, $category, $updown, $gender, $role, $subjects);
+        $userFactory = new SearchResultFactories();
+        $users = $userFactory->initializeUsers($keyword, $category, $updown, $gender, $role, $subjects);
         $subject = Subjects::all();
         return view('authenticated.users.search', compact('users', 'subjects'));
     }
