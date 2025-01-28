@@ -38,27 +38,18 @@ class CalendarSettingView{
         $html[] = '<tr class="' . $week->getClassName() . '">';
         $days = $week->getDays();
         foreach ($days as $day) {
-          $startDay = $this->carbon->copy()->startOfMonth();
-          $toDay = Carbon::today(); // 現在の日付と比較
+          $startDay = $this->carbon->format("Y-m-01");
+          $toDay = $this->carbon->format("Y-m-d");
 
-            // 過ぎた日かどうかのチェック
             if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
               $html[] = '<td class="past-day border">';
-              $html[] = $day->render();
-              $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px; color: #888;">受付終了</p>';
-              $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
-              $html[] = '</td>';
-            } else {
+            }else{
               $html[] = '<td class="border '.$day->getClassName().'">';
-              $html[] = $day->render();
-              $html[] = '<div class="adjust-area">';
-              $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
-            }// リモ部の選択肢を表示
-            // $html[] = $day->selectPart($day->everyDay());
-            $dayDate = Carbon::parse($day->everyDay());  // 例えば、$day->everyDay() が 'Y-m-d' 形式の日付ならこれでCarbonインスタンスに変換される　　
-            // $toDay = Carbon::today();
-            // 過ぎた日の場合、入力欄をdisabledに
-            if ($dayDate->lt($toDay)) {
+            }
+            $html[] = $day->render();
+            $html[] = '<div class="adjust-area">';
+              if($day->everyDay()){
+              if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
                 $html[] = '<p class="d-flex m-0 p-0">1部<input class="w-25" style="height:20px;" name="reserve_day[' . $day->everyDay() . '][1]" type="text" form="reserveSetting" value="' . $day->onePartFrame($day->everyDay()) . '" disabled></p>';
                 $html[] = '<p class="d-flex m-0 p-0">2部<input class="w-25" style="height:20px;" name="reserve_day[' . $day->everyDay() . '][2]" type="text" form="reserveSetting" value="' . $day->twoPartFrame($day->everyDay()) . '" disabled></p>';
                 $html[] = '<p class="d-flex m-0 p-0">3部<input class="w-25" style="height:20px;" name="reserve_day[' . $day->everyDay() . '][3]" type="text" form="reserveSetting" value="' . $day->threePartFrame($day->everyDay()) . '" disabled></p>';
@@ -67,16 +58,15 @@ class CalendarSettingView{
                 $html[] = '<p class="d-flex m-0 p-0">2部<input class="w-25" style="height:20px;" name="reserve_day[' . $day->everyDay() . '][2]" type="text" form="reserveSetting" value="' . $day->twoPartFrame($day->everyDay()) . '"></p>';
                 $html[] = '<p class="d-flex m-0 p-0">3部<input class="w-25" style="height:20px;" name="reserve_day[' . $day->everyDay() . '][3]" type="text" form="reserveSetting" value="' . $day->threePartFrame($day->everyDay()) . '"></p>';
             }
-
+          }
             $html[] = '</div>';
-            $html[] = '</td>'; // tdを閉じる
+            $html[] = '</td>';
         }
-        $html[] = '</tr>'; // trを閉じる
+        $html[] = '</tr>';
     }
-
-    $html[] = '</tbody>'; // tbodyを閉じる
-    $html[] = '</table>'; // tableを閉じる
-    $html[] = '</div>'; // divを閉じる
+    $html[] = '</tbody>';
+    $html[] = '</table>';
+    $html[] = '</div>';
     $html[] = '<form action="' . route('calendar.admin.update') . '" method="post" id="reserveSetting">' . csrf_field() . '</form>';
 
     return implode("", $html); // 結果を返す

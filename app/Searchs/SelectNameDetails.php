@@ -25,7 +25,7 @@ class SelectNameDetails implements DisplayUsers{
     }elseif (!is_array($subjects)) { //変数 $subjects が配列ではない場合に true を返す
       $subjects = explode(',', $subjects); // explode(',', $subjects)subjects文字列の場合カンマで分割し、配列に変換 ['1', '2', '3']
     }
-
+// dd($subjects);
 
     $users = User::with('subjects')
     ->where(function($q) use ($keyword){

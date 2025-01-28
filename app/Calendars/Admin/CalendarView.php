@@ -6,6 +6,7 @@ use App\Models\Users\User;
 class CalendarView{
   private $carbon;
 
+
   function __construct($date){
     $this->carbon = new Carbon($date);
   }
@@ -45,7 +46,6 @@ class CalendarView{
           $html[] = '<td class="border '.$day->getClassName().'">';
         }
         $html[] = $day->render();
-        $html[] = $day->dayPartCounts($day->everyDay());
         $html[] = '</td>';
       }
       $html[] = '</tr>';

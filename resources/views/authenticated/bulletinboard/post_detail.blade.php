@@ -10,7 +10,7 @@
           <div>
             <!-- ログイン中のユーザーの投稿にのみ編集、削除ボタンを表示 -->
           @if(Auth::user()->id ==$post->user_id)
-            <span class="edit-modal-open" post_title="{{ $post->post_title }}" post_body="{{ $post->post_body }}" post_id="{{ $post->id }}">編集</span>
+            <span class="edit-modal-open" post_title="{{ $post->post_title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}">編集</span>
             <a href="{{ route('post.delete', ['id' => $post->id]) }}" onclick="return confirm('こちらの投稿を削除します。よろしいでしょうか？')">削除</a>
             @endif
           </div>
@@ -25,7 +25,7 @@
           <span class="ml-5">{{ $post->created_at }}</span>
         </div>
         <div class="detsail_post_title">{{ $post->post_title }}</div>
-        <div class="mt-3 detsail_post_body">{{ $post->post_body }}</div>
+        <div class="mt-3 detsail_post">{{ $post->post }}</div>
       </div>
       <div class="p-3">
         <div class="comment_container">

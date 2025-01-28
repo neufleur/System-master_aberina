@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->integer('id')->autoIncrement()->comment('id');
             $table->integer('user_id')->comment('ユーザーid');
             $table->string('post_title', 191)->index()->comment('タイトル');
-            $table->string('post_body', 191)->index()->comment('投稿内容');
+            $table->string('post', 191)->index()->comment('投稿内容');
             $table->timestamp('created_at')->nullable()->comment('登録日時');
         });
     }

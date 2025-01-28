@@ -67,7 +67,12 @@ td.past-day {
 .adjust-table-btn{
   width:70%;
 }
-
+.reserved-day {
+  background-color: #ffcccc; /* 赤背景 */
+  color: #000; /* 文字色を黒に */
+  border-radius: 5px; /* 丸みを少し追加 */
+  padding: 5px;
+}
 /* モーダル */
 .modal{
     display: none;
