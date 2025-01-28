@@ -41,9 +41,8 @@ class CalendarView{
         $startDay = $this->carbon->copy()->format("Y-m-01"); //月の最初の初めの日
         $toDay = $this->carbon->copy()->format("Y-m-d");
         //過去の日
-         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){ //月の最初の初めの日が現在よりも早いか && 遅いか
-          $html[] = '<td class="calendar-td">';
-          // $html[] = '<td class="past-day border">';
+         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){ //月の最初の初めの日が現在よりも早いか && 遅いか　カレンダーの表示
+          $html[] = '<td class="past-day border">';
           $html[] = '<p class="m-auto p-0 w-75" style="font-size:14px; color: #222222;">受付終了</p>';
         }else {
         //今日以降だった場合
@@ -60,7 +59,7 @@ class CalendarView{
           }else if($reservePart == 3){
             $reservePart = "リモ3部";
           }
-          if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
+          if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){ //予約済みの日かどうかチェック
             $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px"></p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }else{
@@ -68,8 +67,10 @@ class CalendarView{
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }
         }else{
+          if($startDay > $day->everyDay() || $toDay < $day->everyDay()) {//今日以降のみ選択可能（過去の日は選択肢を表示しない）
           $html[] = $day->selectPart($day->everyDay());
         }
+      }
         $html[] = $day->getDate();
         $html[] = '</td>';
       }
@@ -83,7 +84,6 @@ class CalendarView{
 
     return implode('', $html);
   }
-
   protected function getWeeks(){
     $weeks = [];
     $firstDay = $this->carbon->copy()->firstOfMonth();
@@ -97,5 +97,5 @@ class CalendarView{
       $tmpDay->addDay(7);
     }
     return $weeks;
-  }
+}
 }
