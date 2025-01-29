@@ -40,19 +40,18 @@ class CalendarView{
       foreach($days as $day){
         $startDay = $this->carbon->copy()->format("Y-m-01"); //月の最初の初めの日
         $toDay = $this->carbon->copy()->format("Y-m-d");
+        $yesterday = $this->carbon->copy()->subDay()->format("Y-m-d");
         //過去の日
          if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){ //月の最初の初めの日が現在よりも早いか && 遅いか　カレンダーの表示
           $html[] = '<td class="past-day border">';
         }else {
+
         //今日以降だった場合
         $html[] = '<td class="calendar-td '.$day->getClassName().'">';
         }
-        $html[] = $day->render();
+      $html[] = $day->render();
 
-        if ($startDay <= $day->everyDay() && $toDay >= $day->everyDay()) {
-          $html[] = '<p class="m-auto p-0 w-75" style="font-size:14px; color: #222222;">受付終了</p>';
-      }
-        // 予約済みの日付かチェック
+        // 予約済みの日付かチェック　
         if(in_array($day->everyDay(), $day->authReserveDay())){
           $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
           if($reservePart == 1){
@@ -62,24 +61,42 @@ class CalendarView{
           }else if($reservePart == 3){
             $reservePart = "リモ3部";
           }
+          //⓵
+          if (in_array($day->everyDay(), $day->authReserveDay())) {
+            $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
+            $reservePartLabel = ['リモ1部', 'リモ2部', 'リモ3部'][$reservePart - 1];
+            $html[] = '<p class="m-auto p-0 w-75" style="font-size:14px; color: black;">' . $reservePartLabel . '</p>';
+          }else{
+            $html[] = '<p class="m-auto p-0 w-75" style="font-size:14px; color: #222222;">受付終了</p>';
+          }
+          $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+    //     }else {
+    //          $html[] = '<td class="calendar-td '.$day->getClassName().'">';
+    // $html[] = $day->render();
+    //     }
+          //⓶
           if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){ //予約済みの日かどうかチェック
-            // $html[] = '<p class="m-auto p-0 w-75" style="font-size:14px; color: #222222;"></p>';
-            $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+            $html[] = '<p class="m-auto p-0 w-75" style="font-size:14px; color: #222222;"></p>';
+            // $html[] = '<p>受付終了</p>';
+
           }else{
             $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+
           }
         }else{
-          if($startDay > $day->everyDay() || $toDay < $day->everyDay()) {//今日以降のみ選択可能（過去の日は選択肢を表示しない）
-          $html[] = $day->selectPart($day->everyDay());
+          // if($startDay > $day->everyDay() || $toDay < $day->everyDay()) {//今日以降のみ選択可能（過去の日は選択肢を表示しない）
+          $html[] = $day->selectPart($day->everyDay());//このコード行は、カレンダーの各日の予約可能な部数を選択するため
+        // }
 
-        }
       }
         $html[] = $day->getDate();
         $html[] = '</td>';
       }
+      
       $html[] = '</tr>';
     }
+
     $html[] = '</tbody>';
     $html[] = '</table>';
     $html[] = '</div>';
