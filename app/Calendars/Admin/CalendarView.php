@@ -46,6 +46,7 @@ class CalendarView{
           $html[] = '<td class="border '.$day->getClassName().'">';
         }
         $html[] = $day->render();
+        $html[] = $day->dayPartCounts($day->everyDay());
         $html[] = '</td>';
       }
       $html[] = '</tr>';

@@ -43,12 +43,15 @@ class CalendarView{
         //過去の日
          if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){ //月の最初の初めの日が現在よりも早いか && 遅いか　カレンダーの表示
           $html[] = '<td class="past-day border">';
-          $html[] = '<p class="m-auto p-0 w-75" style="font-size:14px; color: #222222;">受付終了</p>';
         }else {
         //今日以降だった場合
         $html[] = '<td class="calendar-td '.$day->getClassName().'">';
         }
         $html[] = $day->render();
+
+        if ($startDay <= $day->everyDay() && $toDay >= $day->everyDay()) {
+          $html[] = '<p class="m-auto p-0 w-75" style="font-size:14px; color: #222222;">受付終了</p>';
+      }
         // 予約済みの日付かチェック
         if(in_array($day->everyDay(), $day->authReserveDay())){
           $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
@@ -60,7 +63,7 @@ class CalendarView{
             $reservePart = "リモ3部";
           }
           if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){ //予約済みの日かどうかチェック
-            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px"></p>';
+            // $html[] = '<p class="m-auto p-0 w-75" style="font-size:14px; color: #222222;"></p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }else{
             $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
@@ -69,6 +72,7 @@ class CalendarView{
         }else{
           if($startDay > $day->everyDay() || $toDay < $day->everyDay()) {//今日以降のみ選択可能（過去の日は選択肢を表示しない）
           $html[] = $day->selectPart($day->everyDay());
+
         }
       }
         $html[] = $day->getDate();
