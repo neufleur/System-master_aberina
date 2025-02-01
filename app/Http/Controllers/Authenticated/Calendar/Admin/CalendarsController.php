@@ -17,6 +17,7 @@ class CalendarsController extends Controller
 {
     public function show(){
         $calendar = new CalendarView(time());
+        // $calendar = new CalendarView(Carbon::now()->format('Y-m-01'));//私が追加　現在の月を表示
         return view('authenticated.calendar.admin.calendar', compact('calendar'));
     }
 

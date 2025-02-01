@@ -10,12 +10,16 @@ use App\Models\Calendars\Calendar;
 use App\Models\Users\User;
 use Auth;
 use DB;
+use Carbon\Carbon;
+
+
 //スクール予約画面
 class CalendarsController extends Controller
 {
     public function show(){
         //追加　ユーザーが予約した日付と部数を取得
         $calendar = new CalendarView(time());
+        // $calendar = new CalendarView(Carbon::now()->format('Y-m-01'));//私が追加　現在の月を表示
         return view('authenticated.calendar.general.calendar', compact('calendar'));
     }
 
