@@ -41,7 +41,8 @@ class CalendarView{
         $startDay = $this->carbon->copy()->format("Y-m-01"); //月の最初の初めの日
         // $toDay = $this->carbon->copy()->format("Y-m-d");
         $toDay = Carbon::now()->format("Y-m-d");
-
+// 予約表示処理
+$dayDate = new Carbon($day->everyDay());
         //過去の日
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){//月の最初の初めの日が現在よりも早いか && 遅いか　カレンダーの表示
           $html[] = '<td class="past-day border">';
@@ -50,28 +51,9 @@ class CalendarView{
         }
         $html[] = $day->render();
 
-
-        
-        if ($toDay > $day->everyDay()) {
-          // 過去の日
-          if (in_array($day->everyDay(), $day->authReserveDay())) {
-              // 予約がある場合（○部参加を黒文字で表示）
-              
-              $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
-              $reservePartLabel = ['1部参加', '2部参加', '3部参加'][$reservePart - 1];
-              $html[] = '<p class="m-auto p-0 w-75" style="font-size:14px; color: #222222;">' . $reservePartLabel . '</p>';
-          } else {
-              // 予約なし（受付終了を黒文字で表示）
-              $html[] = '<p class="m-auto p-0 w-75" style="font-size:14px; color: #222222;">受付終了</p>';
-              $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
-            }
-          }else {
-            if (!in_array($day->everyDay(), $day->authReserveDay())) {
-          //     // 今日以降なら選択肢を表示
-              $html[] = $day->selectPart($day->everyDay());
-          }
-        }
 // 予約済みの日付かチェック　
+if ($dayDate->isToday() || $dayDate->isFuture()) {
+
         if(in_array($day->everyDay(), $day->authReserveDay())){
           $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
           $reservePartLabel = ['リモ1部', 'リモ2部', 'リモ3部'][$reservePart - 1];
@@ -83,18 +65,34 @@ class CalendarView{
             $reservePart = "リモ3部";
           }
           $html[] = '<button type="submit" class="btn btn-danger p-0 w-75 text-white" name="delete_date" style="font-size:12px" value="' .$day->authReserveDate($day->everyDay())->first()->setting_reserve . '">' . $reservePartLabel . '</button>';
-
+          $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
         }else {
-          // 予約なし（プルダウンメニューで選択可能）今日以降のみ選択可能（過去の日は選択肢を表示しない）
-            // $html[] = $day->selectPart($day->everyDay());
-        // }
+        // // 予約なし（プルダウンメニューで選択可能）今日以降のみ選択可能（過去の日は選択肢を表示しない）
+        $html[] = $day->selectPart($day->everyDay());
+        }
+        }    //  ⓵
+            // 過去の日
+            // if ($dayDate->isPast() && !$dayDate->isToday()) {
+              elseif ($dayDate->isPast()){
+            if (in_array($day->everyDay(), $day->authReserveDay())) {
+                // 予約がある場合（○部参加を黒文字で表示）
+                $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
+                $reservePartLabel = ['1部参加', '2部参加', '3部参加'][$reservePart - 1];
+                $html[] = '<p class="m-auto p-0 w-75" style="font-size:14px; color: #222222;">' . $reservePartLabel . '</p>';
+            } else {
+                // 予約なし（受付終了を黒文字で表示）
+                $html[] = '<p class="m-auto p-0 w-75" style="font-size:14px; color: #222222;">受付終了</p>';
+            }
+                $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+                $html[] = '</td>';
+            }
 
         $html[] = $day->getDate();
         $html[] = '</td>';
+        }
       }
-    }
       $html[] = '</tr>';
-    }
+  
 
     $html[] = '</tbody>';
     $html[] = '</table>';
