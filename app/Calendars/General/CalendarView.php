@@ -64,8 +64,15 @@ if ($dayDate->isToday() || $dayDate->isFuture()) {
           }else if($reservePart == 3){
             $reservePart = "リモ3部";
           }
-          $html[] = '<button type="submit" class="btn btn-danger p-0 w-75 text-white" name="delete_date" style="font-size:12px" value="' .$day->authReserveDate($day->everyDay())->first()->setting_reserve . '">' . $reservePartLabel . '</button>';
-          $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+
+          $html[] = '<form action="/delete/calendar" method="POST">';
+$html[] = csrf_field();
+          $html[] = '<span class="reserve-modal-open" data-reserve-date="予約日: ' . $day->everyDay() . '" data-reserve-time="時間: ' . $reservePartLabel . '" data-reserve-id="' . $day->everyDay() . '"></span>';
+          $html[] = '<button type="submit" class="btn btn-danger p-0 w-75 text-white"  style="font-size:12px">' . $reservePartLabel . '</button>';
+          $html[] = '<input type="hidden" name="delete_date" value="" form="reserveParts">';
+          $html[] = '</form>';
+          // $html[] = '<div class=""> <a class="btn btn-danger" href="/delete/calendar" onclick="return confirm(\'こちらの投稿を削除します。よろしいでしょうか？\')" ></a></div>'; wbs cms .$day->authReserveDate($day->everyDay())->first()->setting_reserve .
+          // モーダルのHTML
         }else {
         // // 予約なし（プルダウンメニューで選択可能）今日以降のみ選択可能（過去の日は選択肢を表示しない）
         $html[] = $day->selectPart($day->everyDay());

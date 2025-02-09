@@ -11,7 +11,8 @@ use App\Models\Calendars\Calendar;
 use App\Models\Users\User;
 use Auth;
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
+
 //スクール予約確認画面
 class CalendarsController extends Controller
 {
@@ -47,4 +48,6 @@ class CalendarsController extends Controller
         }
         return redirect()->route('calendar.admin.setting', ['user_id' => Auth::id()]);
     }
+
+    
 }
