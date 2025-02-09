@@ -1,14 +1,12 @@
 $(document).ready(function() {
-    // 予約ボタンがクリックされたときにモーダルを開く
+    // 予約した日付のボタンがクリックされたときにモーダルを開く
     $(document).on('click', '.reserve-modal-open', function() {
-    
+    // クリックされたら取得
     var reserveDate = $(this).data('reserve-date');
     var reserveTime = $(this).data('reserve-time');
-    
+     // クリックされたらを表示
     $('#modal-date').text(reserveDate);
     $('#modal-time').text(reserveTime);
-    
-    // モーダルを表示
     $('#reserve-modal').fadeIn();
   });
 
