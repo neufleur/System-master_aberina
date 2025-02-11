@@ -72,6 +72,7 @@ if ($dayDate->isToday() || $dayDate->isFuture()) {
           $html[] = '<input type="hidden" name="delete_date" value="" form="reserveParts">';
           $html[] = '</span>';
           $html[] = '</form>';
+          
           // dd($html);
           // $html[] = '<div class=""> <a class="btn btn-danger" href="/delete/calendar" onclick="return confirm(\'こちらの投稿を削除します。よろしいでしょうか？\')" ></a></div>'; wbs cms .$day->authReserveDate($day->everyDay())->first()->setting_reserve .
           // モーダルのHTML

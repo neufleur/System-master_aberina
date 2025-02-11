@@ -11,7 +11,7 @@ $(document).ready(function() {
   });
 
   // キャンセルボタンがクリックされたとき
-  $('#reserve-modal .btn-danger').on('click', function() {
+  $('button.btn-danger').on('click', function() {
     $('#deleteParts').submit();  // フォームを送信
     $('#reserve-modal').fadeOut();  // モーダルを閉じる
 });

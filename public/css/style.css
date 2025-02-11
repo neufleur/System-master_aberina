@@ -242,15 +242,15 @@ td.past-day {
 }
 
 /* 予約機能　スクール予約*/
-#reserve-modal {
-  z-index: 9999;  /* 最前面に表示 */
-}
+
 /*  キャンセルモーダル*/
 
 span.reserve-modal-open{
   display: inline-block;
   width: 100%;
-  height: 50%;
+  height: 40px;
   cursor: pointer;
+  line-height: 40px;
+
 
 }
