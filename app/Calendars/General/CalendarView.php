@@ -67,9 +67,10 @@ if ($dayDate->isToday() || $dayDate->isFuture()) {
 
           $html[] = '<form action="/delete/calendar" method="POST">';
           $html[] = csrf_field();
-          $html[] = '<span class="reserve-modal-open" data-reserve-date="予約日: ' . $day->everyDay() . '" data-reserve-time="時間: ' . $reservePartLabel . '" data-reserve-id="' . $day->everyDay() . '"></span>';
+          $html[] = '<span class="reserve-modal-open" data-reserve-date="予約日: ' . $day->everyDay() . '" data-reserve-time="時間: ' . $reservePartLabel . '" data-reserve-id="' . $day->everyDay() . '">';
           $html[] = '<button type="submit" class="btn btn-danger p-0 w-75 text-white"  style="font-size:12px">' . $reservePartLabel . '</button>';
           $html[] = '<input type="hidden" name="delete_date" value="" form="reserveParts">';
+          $html[] = '</span>';
           $html[] = '</form>';
           // dd($html);
           // $html[] = '<div class=""> <a class="btn btn-danger" href="/delete/calendar" onclick="return confirm(\'こちらの投稿を削除します。よろしいでしょうか？\')" ></a></div>'; wbs cms .$day->authReserveDate($day->everyDay())->first()->setting_reserve .
