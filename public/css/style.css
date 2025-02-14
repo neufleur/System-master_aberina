@@ -245,12 +245,16 @@ td.past-day {
 
 /*  キャンセルモーダル*/
 
-span.reserve-modal-open{
+.reserve-modal-open {
   display: inline-block;
   width: 100%;
-  height: 40px;
   cursor: pointer;
   line-height: 40px;
+  text-align: center;
+}
 
-
+.reserve-modal-open span {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
 }

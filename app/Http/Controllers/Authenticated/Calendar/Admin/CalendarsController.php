@@ -23,7 +23,13 @@ class CalendarsController extends Controller
     }
 
     public function reserveDetail($date, $part){
-        $reservePersons = ReserveSettings::with('users')->where('setting_reserve', $date)->where('setting_part', $part)->get();
+        //setting_reserve,setting_part指定された日時部数と一致するものを取得
+        $reservePersons = ReserveSettings::with('users')->whereDate('setting_reserve',$date)->where('setting_part', $part)->get();
+        // dd($reservePersons);
+        // setting_reserveの日付を年月日の形式に変換
+        foreach ($reservePersons as $reservePerson) {
+        $reservePerson->formatted_reserve_date = Carbon::parse($reservePerson->setting_reserve)->format('Y年m月d日');
+    }
         return view('authenticated.calendar.admin.reserve_detail', compact('reservePersons', 'date', 'part'));
     }
 

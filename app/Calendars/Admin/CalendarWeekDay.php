@@ -35,14 +35,21 @@ class CalendarWeekDay{
     $three_part_count = $three_part ? $three_part->users->count() : 0;
 
     $html[] = '<div class="text-left">';
+    //$ymd にはクリックした日の値が入る → その日の日付がURLに埋め込まれる
     if($one_part){
-      $html[] = '<p class="day_part m-0 pt-1">1部' . $one_part_count . '</p>';
+      $html[] = '<p class="day_part m-0 pt-1">
+                 <a href="' . route('calendar.admin.detail', ['date' => $ymd, 'part' => 1]) . '">1部</a>
+                 ' . $one_part_count . ' </p>';
     }
     if($two_part){
-      $html[] = '<p class="day_part m-0 pt-1">2部' . $two_part_count . '</p>';
+      $html[] = '<p class="day_part m-0 pt-1">
+                 <a href="' . route('calendar.admin.detail', ['date' => $ymd, 'part' => 1]) . '">2部</a>
+                ' . $two_part_count . '</p>';
     }
     if($three_part){
-      $html[] = '<p class="day_part m-0 pt-1">3部' . $three_part_count . '</p>';
+      $html[] = '<p class="day_part m-0 pt-1">
+                 <a href="' . route('calendar.admin.detail', ['date' => $ymd, 'part' => 1]) . '">3部</a>
+                 ' . $three_part_count . '</p>';
     }
     $html[] = '</div>';
 
