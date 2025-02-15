@@ -43,12 +43,12 @@ class CalendarWeekDay{
     }
     if($two_part){
       $html[] = '<p class="day_part m-0 pt-1">
-                 <a href="' . route('calendar.admin.detail', ['date' => $ymd, 'part' => 1]) . '">2部</a>
+                 <a href="' . route('calendar.admin.detail', ['date' => $ymd, 'part' => 2]) . '">2部</a>
                 ' . $two_part_count . '</p>';
     }
     if($three_part){
       $html[] = '<p class="day_part m-0 pt-1">
-                 <a href="' . route('calendar.admin.detail', ['date' => $ymd, 'part' => 1]) . '">3部</a>
+                 <a href="' . route('calendar.admin.detail', ['date' => $ymd, 'part' => 3]) . '">3部</a>
                  ' . $three_part_count . '</p>';
     }
     $html[] = '</div>';

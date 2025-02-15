@@ -15,7 +15,7 @@ $(document).ready(function() {
   // キャンセルボタンがクリックされたとき
     $(document).on('click', '.js-delete-reserve', function(event) {
     event.preventDefault();
-    $('form').submit(); // フォームを送信
+    $('#deleteParts').submit(); // フォームを送信
     $('#reserve-modal').fadeOut();  // モーダルを閉じる
 });
     // モーダル閉じる処理

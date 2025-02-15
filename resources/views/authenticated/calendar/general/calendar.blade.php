@@ -20,7 +20,8 @@
         <p id="modal-time"></p>
         <p>上記の予約をキャンセルしてもよろしいですか？</p>
         <button class="btn btn-primary js-modal-close">閉じる</button>
-        <button type="submit" class="btn btn-danger">キャンセル</button>
+        
+        <button type="button" class="btn btn-danger js-delete-reserve">キャンセル</button>
     </div>
 </div>
   </div>
