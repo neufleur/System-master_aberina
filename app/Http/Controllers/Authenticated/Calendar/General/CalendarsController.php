@@ -28,6 +28,12 @@ class CalendarsController extends Controller
         try{
             $getPart = $request->getPart;
             $getDate = $request->getData;
+            // 要素数が異なる場合、不足分を "" で埋める
+if (count($getPart) < count($getDate)) {
+    $getPart = array_pad($getPart, count($getDate), "");
+} elseif (count($getPart) > count($getDate)) {
+    $getDate = array_pad($getDate, count($getPart), "");
+}
             $reserveDays = array_filter(array_combine($getDate, $getPart));
             foreach($reserveDays as $key => $value){
                 $reserve_settings = ReserveSettings::where('setting_reserve', $key)->where('setting_part', $value)->first();
@@ -42,12 +48,20 @@ class CalendarsController extends Controller
     }
     public function delete(Request $request)
     {
+        
         $reserveId = $request->input('delete_date');
-            \DB::table('reserve_setting_users') //データーベースの投稿された内容読み込む
-    ->where('id', $reserveId) //削除する投稿選ぶ
-    ->delete();
+          // 例として、対象ユーザーのIDが取得できている前提
+    $userId = auth()->id();
+
+    // Userモデルのリレーションから対象の予約設定を解除（detach）
+    $user = User::find($userId);
+    if ($user) {
+        $user->reserveSettings()->detach($reserveId);
+    }
     return redirect()->back();
         }
+        
+
 }
 
 

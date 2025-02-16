@@ -68,11 +68,14 @@ if ($dayDate->isToday() || $dayDate->isFuture()) {
           $html[] = '<form action="/delete/calendar" method="POST">';
           $html[] = csrf_field();
           $html[] = '<button type="button" class="btn btn-danger p-0 w-75 text-white reserve-modal-open" style="font-size:12px;"
-                        data-reserve-date="予約日: ' . $day->everyDay() . '" data-reserve-time="時間: ' . $reservePartLabel . '" data-reserve-id="' . $day->everyDay() . '">';
+                        data-reserve-date="予約日: {{ $day->everyDay() }}"
+                       data-reserve-time="時間: { $reservePartLabel }}"
+                       data-reserve-id="{{ $day->everyDay() }}">';
           $html[] = '<span>' . $reservePartLabel . '</span>';
           $html[] = '</button>';
           $html[] = '<input type="hidden" name="delete_date" value="" form="reserveParts">';
           $html[] = '</form>';
+
 
         }else {
         // // 予約なし（プルダウンメニューで選択可能）今日以降のみ選択可能（過去の日は選択肢を表示しない）
