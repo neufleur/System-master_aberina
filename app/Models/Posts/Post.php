@@ -5,7 +5,7 @@ namespace App\Models\Posts;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Users\User;
 use App\Models\Posts\PostComment;
-
+use App\Models\Categories\SubCategory;
 class Post extends Model
 {
 
@@ -32,7 +32,9 @@ class Post extends Model
     }
 
     public function subCategories(){
-        // リレーションの定義
+        // リレーションの定義　多対多
+        return $this->belongsToMany(SubCategory::class, 'post_sub_category', 'post_id', 'sub_category_id');
+
     }
 
     // コメント数

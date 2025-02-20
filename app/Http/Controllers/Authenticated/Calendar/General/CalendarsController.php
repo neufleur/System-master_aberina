@@ -19,25 +19,26 @@ class CalendarsController extends Controller
     public function show(){
         //追加　ユーザーが予約した日付と部数を取得
         $calendar = new CalendarView(time());
-        // $calendar = new CalendarView(Carbon::now()->format('Y-m-01'));//私が追加　現在の月を表示
         return view('authenticated.calendar.general.calendar', compact('calendar'));
     }
 
     public function reserve(Request $request){
         DB::beginTransaction();
         try{
+            //部数日付格納する
             $getPart = $request->getPart;
             $getDate = $request->getData;
-            // 要素数が異なる場合、不足分を "" で埋める
-if (count($getPart) < count($getDate)) {
-    $getPart = array_pad($getPart, count($getDate), "");
-} elseif (count($getPart) > count($getDate)) {
-    $getDate = array_pad($getDate, count($getPart), "");
-}
+            // 素数が異なる場合、不足分を "" で埋めて空欄の日付を同じ数の配列のように埋める
+                if (count($getPart) < count($getDate)) {
+                    $getPart = array_pad($getPart, count($getDate), "");
+                } elseif (count($getPart) > count($getDate)) {
+                    $getDate = array_pad($getDate, count($getPart), "");
+                }
+//フォームから送信された日付の配列$getDateと部数の配列$getPartを組み合わせて
             $reserveDays = array_filter(array_combine($getDate, $getPart));
             foreach($reserveDays as $key => $value){
                 $reserve_settings = ReserveSettings::where('setting_reserve', $key)->where('setting_part', $value)->first();
-                $reserve_settings->decrement('limit_users');
+                $reserve_settings->decrement('limit_users'); //取得した予約設定レコードの limit_users カラムの値を1減らす
                 $reserve_settings->users()->attach(Auth::id());
             }
             DB::commit();
@@ -46,21 +47,46 @@ if (count($getPart) < count($getDate)) {
         }
         return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
     }
+    // public function delete(Request $request)
+    // {
+        
+    //     $reserveId = $request->input('delete_date');
+    //       // 例として、対象ユーザーのIDが取得できている前提
+    // $userId = auth()->id();
+
+    // // Userモデルのリレーションから対象の予約設定を解除（detach）
+    // $user = User::find($userId);
+    // if ($user) {
+    //     $user->reserveSettings()->detach($reserveId);
+    // }
+    // return redirect()->back();
+    //     }
+
     public function delete(Request $request)
     {
-        
-        $reserveId = $request->input('delete_date');
-          // 例として、対象ユーザーのIDが取得できている前提
-    $userId = auth()->id();
+        //ユーザーがキャンセルしたい日付、部数取得
+        $reserveDate = $request->input('delete_date');
+        $reservePart = $request->input('delete_part');
 
-    // Userモデルのリレーションから対象の予約設定を解除（detach）
-    $user = User::find($userId);
-    if ($user) {
-        $user->reserveSettings()->detach($reserveId);
-    }
-    return redirect()->back();
+        $userId = auth()->id();
+        $user = User::find($userId);
+    
+        // 該当する予約が存在するか確if文で確認　キャンセル対象の日付、部数
+        if ($user && $reserveDate && $reservePart) {
+            // 予約設定を、指定された日付と部数で取得　$reserveDateとデータベースのsetting_reserve一致するかどうか
+            $reservationToCancel = ReserveSettings::whereDate('setting_reserve', '=', Carbon::parse($reserveDate)->toDateString())
+                ->where('setting_part', $reservePart)
+                ->first();
+    
+            if ($reservationToCancel) {
+                // ユーザーとその予約設定との関連を解除する
+                $user->reserveSettings()->detach($reservationToCancel->id);
+                // キャンセル時に空き枠を増やす
+                $reservationToCancel->increment('limit_users');
+            }
         }
-        
+        return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
+    }
 
 }
 

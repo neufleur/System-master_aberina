@@ -7,8 +7,8 @@ $(document).ready(function() {
     var reserveDate = $(this).data('reserve-date');
     var reserveTime = $(this).data('reserve-time');
      // クリックされたらを表示
-    $('#modal-date').text(reserveDate);
-    $('#modal-time').text(reserveTime);
+    $('#modal-date').text("予約日: " + reserveDate);
+    $('#modal-time').text("時間: " + reserveTime);
     $('#reserve-modal').fadeIn();
   });
 

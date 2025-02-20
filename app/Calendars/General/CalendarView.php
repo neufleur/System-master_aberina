@@ -65,15 +65,15 @@ if ($dayDate->isToday() || $dayDate->isFuture()) {
             $reservePart = "リモ3部";
           }
           //キャンセル時のモーダル　$day=カレンダーの1日分のデータ
-          $html[] = '<form action="/delete/calendar" method="POST">';
+          $html[] = '<form action="/delete/calendar" method="POST" id="cancelForm_' . $day->everyDay() . '">';
           $html[] = csrf_field();
-          $html[] = '<button type="button" class="btn btn-danger p-0 w-75 text-white reserve-modal-open" style="font-size:12px;"
-                        data-reserve-date="予約日: {{ $day->everyDay() }}"
-                       data-reserve-time="時間: { $reservePartLabel }}"
-                       data-reserve-id="{{ $day->everyDay() }}">';
+          $html[] = '<button type="submit" class="btn btn-danger p-0 w-75 text-white reserve-modal-open" style="font-size:12px;"
+          data-reserve-date="' . $day->everyDay() . '" data-reserve-time="' . $reservePartLabel . '" data-reserve-id="' . $day->everyDay() . '">';
           $html[] = '<span>' . $reservePartLabel . '</span>';
           $html[] = '</button>';
-          $html[] = '<input type="hidden" name="delete_date" value="" form="reserveParts">';
+          //キャンセル送信する際にどの予約を削除するのかを特定するためのデータをフォームに含める役割
+          $html[] = '<input type="hidden" name="delete_date" value="' . $day->everyDay() . '">';
+          $html[] = '<input type="hidden" name="delete_part" value="' . $reservePart . '">';
           $html[] = '</form>';
 
 

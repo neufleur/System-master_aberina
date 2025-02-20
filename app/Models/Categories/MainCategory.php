@@ -13,7 +13,9 @@ class MainCategory extends Model
     ];
 
     public function subCategories(){
-        // リレーションの定義
+        // リレーションの定義　1つのMainCategoryに対して複数のサブカテゴリー
+        return $this->hasMany(SubCategory::class, 'main_category_id');
+
     }
 
 }

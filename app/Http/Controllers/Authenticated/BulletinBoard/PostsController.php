@@ -14,7 +14,7 @@ use App\Http\Requests\BulletinBoard\PostFormRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostCommentsRequest;
 use App\Http\Requests\PostEditRequest;
-
+use Illuminate\Support\Facades\Log;
 class PostsController extends Controller
 {
 
@@ -87,6 +87,11 @@ class PostsController extends Controller
     }
     public function mainCategoryCreate(Request $request){
         MainCategory::create(['main_category' => $request->main_category_name]);
+        return redirect()->route('post.input');
+    }
+    public function subCategoryCreate(PostFormRequest $request){ //main_category_id も一緒に保存する
+        Log::debug('リクエストデータ:', $request->all()); // デバッグログ出力
+        SubCategory::create(['sub_category' => $request->sub_category_name, 'main_category_id' => $request->main_category_id]);
         return redirect()->route('post.input');
     }
 
