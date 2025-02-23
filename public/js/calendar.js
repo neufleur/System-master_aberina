@@ -5,17 +5,20 @@ $(document).ready(function() {
 
     // クリックされたら取得
     var reserveDate = $(this).data('reserve-date');
-    var reserveTime = $(this).data('reserve-time');
+    var reservePart = $(this).data('reserve-part');
+    var formId = $(this).closest('form').attr('id'); 
+
      // クリックされたらを表示
     $('#modal-date').text("予約日: " + reserveDate);
-    $('#modal-time').text("時間: " + reserveTime);
+    $('#modal-part').text("時間: " + reservePart);
+    $('#reserve-modal').data('form-id', formId).fadeIn(); 
     $('#reserve-modal').fadeIn();
   });
 
   // キャンセルボタンがクリックされたとき
     $(document).on('click', '.js-delete-reserve', function(event) {
-    event.preventDefault();
-    $('#deleteParts').submit(); // フォームを送信
+        var formId = $('#reserve-modal').data('form-id'); // モーダルに保存されたフォームIDを取得
+        $('#' + formId).submit();  // フォームを送信
     $('#reserve-modal').fadeOut();  // モーダルを閉じる
 });
     // モーダル閉じる処理

@@ -68,7 +68,7 @@ if ($dayDate->isToday() || $dayDate->isFuture()) {
           $html[] = '<form action="/delete/calendar" method="POST" id="cancelForm_' . $day->everyDay() . '">';
           $html[] = csrf_field();
           $html[] = '<button type="submit" class="btn btn-danger p-0 w-75 text-white reserve-modal-open" style="font-size:12px;"
-          data-reserve-date="' . $day->everyDay() . '" data-reserve-time="' . $reservePartLabel . '" data-reserve-id="' . $day->everyDay() . '">';
+          data-reserve-date="' . $day->everyDay() . '" data-reserve-part="' . $reservePart . '">';
           $html[] = '<span>' . $reservePartLabel . '</span>';
           $html[] = '</button>';
           //キャンセル送信する際にどの予約を削除するのかを特定するためのデータをフォームに含める役割

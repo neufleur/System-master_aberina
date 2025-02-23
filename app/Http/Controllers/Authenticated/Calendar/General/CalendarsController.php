@@ -11,6 +11,7 @@ use App\Models\Users\User;
 use Auth;
 use DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 
 //スクール予約画面
@@ -64,6 +65,7 @@ class CalendarsController extends Controller
 
     public function delete(Request $request)
     {
+        Log::debug('リクエストデータ:', $request->all());
         //ユーザーがキャンセルしたい日付、部数取得
         $reserveDate = $request->input('delete_date');
         $reservePart = $request->input('delete_part');
