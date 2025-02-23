@@ -26,6 +26,15 @@
 
             @endif
           </div>
+          <!-- 選択したサブカテゴリー表示 -->
+          @foreach($categories as $category)
+          <ul>
+           @foreach($category->subCategories as $subCategory)
+        <li class="sub_category" sub_category_id="{{ $subCategory->id }}"><span>{{ $subCategory->sub_category }}</span></li>
+            @endforeach
+            </ul>
+        @endforeach
+        
         </div>
       </div>
     </div>
@@ -35,16 +44,24 @@
     <div class="border m-4">
       <div class=""><a href="{{ route('post.input') }}">投稿</a></div>
       <div class="">
-        <input type="text" placeholder="キーワードを検索" name="keyword" form="postSearchRequest">
+        <input type="text" placeholder="キーワードを検索" name="keyword" form="postSearchRequest" >
         <input type="submit" value="検索" form="postSearchRequest">
       </div>
       <input type="submit" name="like_posts" class="category_btn" value="いいねした投稿" form="postSearchRequest">
       <input type="submit" name="my_posts" class="category_btn" value="自分の投稿" form="postSearchRequest">
-      <ul>
+          <ul>
         @foreach($categories as $category)
-        <li class="main_categories" category_id="{{ $category->id }}"><span>{{ $category->main_category }}<span></li>
+        <!-- カテゴリー全てforeachで呼び出す -->
+        <li class="main_categories" category_id="{{ $category->id }}"><span>{{ $category->main_category }}</span></li>
+         </ul>
+          <ul>
+            <!-- メインの中にサブ表示できるように -->
+           @foreach($category->subCategories as $subCategory)
+        <li class="sub_category" sub_category_id="{{ $subCategory->id }}"><span>{{ $subCategory->sub_category }}</span></li>
+            @endforeach
+            </ul>
         @endforeach
-      </ul>
+        </li>
     </div>
   </div>
   <form action="{{ route('post.show') }}" method="get" id="postSearchRequest"></form>
