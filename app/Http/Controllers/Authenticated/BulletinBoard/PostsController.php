@@ -14,6 +14,7 @@ use App\Http\Requests\BulletinBoard\PostFormRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostCommentsRequest;
 use App\Http\Requests\PostEditRequest;
+use App\Http\Requests\PostSearchRequest;
 use Illuminate\Support\Facades\Log;
 class PostsController extends Controller
 {
@@ -85,7 +86,7 @@ class PostsController extends Controller
         Post::findOrFail($id)->delete();
         return redirect()->route('post.show');
     }
-    public function mainCategoryCreate(Request $request){
+    public function mainCategoryCreate(PostFormRequest $request){
         MainCategory::create(['main_category' => $request->main_category_name]);
         return redirect()->route('post.input');
     }
@@ -145,5 +146,24 @@ class PostsController extends Controller
 
              return response()->json();
     }
-}
 
+    //投稿検索
+    public function postSearch(Request $request){
+        $posts = Post::get();
+        $keyword = $request->input('keyword'); //キーワードを取得
+        if(!empty($keyword)){
+            if (!empty($keyword)) {
+                $posts->where('post_title', 'LIKE', "%" . $keyword . "%")
+                      ->orWhere('post_body', 'LIKE', "%" . $keyword . "%")
+                      ->orWhereHas('subCategories', function($query) use ($keyword) {
+                        // サブカテゴリー名の完全一致検索
+                        $query->where('sub_category_name', $keyword);
+                      });
+                    }
+
+                    $posts = $posts->get();
+        
+        return view('authenticated.bulletinboard.posts', compact('posts','keyword'));
+    }
+}
+}

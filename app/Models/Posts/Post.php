@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Users\User;
 use App\Models\Posts\PostComment;
 use App\Models\Categories\SubCategory;
+use App\Models\Categories\MainCategory;
 class Post extends Model
 {
 
@@ -19,6 +20,7 @@ class Post extends Model
         'post_title',
         'post',
         'comment',
+        'sub_category_id',
     ];
 
     public function user(){

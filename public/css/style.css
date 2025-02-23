@@ -204,6 +204,24 @@ td.past-day {
 .sub_categories li input{
   list-style:none;
   cursor:pointer;
+
+}
+.main_category {
+  color: #000;
+ font-weight: 15px;
+}
+
+li.sub_category {
+  /* background-color: cornflowerblue; */
+}
+.sub_category {
+  font-size:12px;
+  border-radius:5px;
+  padding:2px 13px;
+  border:none;
+  display: inline;
+  background-color:#999;
+  color:#FFF;
 }
 
 /* ユーザー検索 */
