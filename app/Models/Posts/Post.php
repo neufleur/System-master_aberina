@@ -20,7 +20,7 @@ class Post extends Model
         'post_title',
         'post',
         'comment',
-        'sub_category_id',
+        'post_category_id',
     ];
 
     public function user(){

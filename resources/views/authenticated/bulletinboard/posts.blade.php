@@ -27,14 +27,12 @@
             @endif
           </div>
           <!-- 選択したサブカテゴリー表示 -->
-          @foreach($categories as $category)
           <ul>
-           @foreach($category->subCategories as $subCategory)
+            <!-- foreachで現在表示している投稿に関連するサブカテゴリーを取得 -->
+          @foreach($post->subCategories as $subCategory)
         <li class="sub_category" sub_category_id="{{ $subCategory->id }}"><span>{{ $subCategory->sub_category }}</span></li>
             @endforeach
             </ul>
-        @endforeach
-        
         </div>
       </div>
     </div>

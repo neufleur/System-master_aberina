@@ -13,12 +13,15 @@
         </ul>
       </div>
     @endif
+    <form action="{{ route('post.create') }}" method="post" id="postCreate">
+      {{ csrf_field() }}
     <div class="">
       <p class="mb-0">カテゴリー</p>
-      <select class="w-100" form="postCreate" name="post_category_id">
+      <select class="w-100" form="postCreate" name="sub_category_id">
         @foreach($main_categories as $main_category)
         <optgroup label="{{ $main_category->main_category }}">
         <!-- サブカテゴリー表示 -->
+
         @foreach($main_category->subCategories as $sub_category)
         <option value="{{ $sub_category->id }}">{{ $sub_category->sub_category }}</option>
         @endforeach
@@ -59,10 +62,14 @@
   {{ csrf_field() }}
       <div class="mt-3">
         <p class="m-0">サブカテゴリー</p>
-        <select class="w-100" name="main_category_id" >
+        <select class="w-100" name="sub_category_id" >
           @foreach($main_categories as $main_category)
-          <option value="{{ $main_category->id }}">{{ $main_category->main_category }}</option>
-          @endforeach
+          <option value="{{ $main_category->main_category }}">
+          @foreach($main_category->subCategories as $sub_category)
+                            <option value="{{ $sub_category->id }}">{{ $sub_category->sub_category }}</option>
+                        @endforeach
+                    </optgroup>
+                @endforeach
         </select>
         <input type="text" class="w-100 mt-2" name="sub_category_name" >
         <input type="submit" value="追加" class="w-100 btn btn-primary p-0 mt-2" >
@@ -70,7 +77,7 @@
      </form>
     </div>
   </div>
-
+  </form>
     </div>
   </div>
   @endcan

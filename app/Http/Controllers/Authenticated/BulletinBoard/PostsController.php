@@ -14,7 +14,6 @@ use App\Http\Requests\BulletinBoard\PostFormRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostCommentsRequest;
 use App\Http\Requests\PostEditRequest;
-use App\Http\Requests\PostSearchRequest;
 use Illuminate\Support\Facades\Log;
 class PostsController extends Controller
 {
@@ -62,14 +61,17 @@ class PostsController extends Controller
     }
 
     public function postCreate(PostFormRequest $request){
-        //dd($request->all());
+        // dd($request->all());
         $post = Post::create([
             'user_id' => Auth::id(),
             'post_title' => $request->post_title,
             'post' => $request->post_body,
         ]);
-
-        return redirect()->route('post.show');
+         // サブカテゴリーが存在する場合にアタッチで紐付け
+    if ($request->has('sub_category_id')) {
+        $post->subCategories()->attach($request->sub_category_id);
+    }
+        return redirect()->route('post.show',['post' => $post->id]);
     }
 
     public function postEdit(PostEditRequest $request){
