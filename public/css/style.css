@@ -201,7 +201,7 @@ td.past-day {
   color:#FFF;
 }
 .main_categories span,
-.sub_categories li input{
+.sub_category li input{
   list-style:none;
   cursor:pointer;
 
@@ -212,7 +212,8 @@ td.past-day {
 }
 
 li.sub_category {
-  /* background-color: cornflowerblue; */
+  list-style:none;
+  cursor:pointer;
 }
 .sub_category {
   font-size:12px;

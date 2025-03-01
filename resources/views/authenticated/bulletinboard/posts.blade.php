@@ -26,12 +26,14 @@
 
             @endif
           </div>
-          <!-- 選択したサブカテゴリー表示 -->
+          <!-- 投稿の選択したサブカテゴリー表示 -->
           <ul>
-            <!-- foreachで現在表示している投稿に関連するサブカテゴリーを取得 -->
+            <!-- foreachで現在表示している投稿に関連するサブカテゴリーを取得 subCategoriesはリレーションで定義されたbelongsToMany() -->
           @foreach($post->subCategories as $subCategory)
-        <li class="sub_category" sub_category_id="{{ $subCategory->id }}"><span>{{ $subCategory->sub_category }}</span></li>
-            @endforeach
+            <li class="sub_category" sub_category_id="{{ $subCategory->id }}">
+            <span>{{ $subCategory->sub_category }}</span></li>
+            <!-- $subCategoryはサブカテゴリーの1つのレコード sub_categoryカラム-->
+          @endforeach
             </ul>
         </div>
       </div>
@@ -55,7 +57,12 @@
           <ul>
             <!-- メインの中にサブ表示できるように -->
            @foreach($category->subCategories as $subCategory)
-        <li class="sub_category" sub_category_id="{{ $subCategory->id }}"><span>{{ $subCategory->sub_category }}</span></li>
+           <!--  $categoryに関連付けられた全てのサブカテゴリーの各サブカテゴリーを$subCategory変数に入れる -->
+        <li class="sub_category" sub_category_id="{{ $subCategory->id }}">
+        <a href="{{ route('post.show', ['category_word' => $subCategory->id]) }}">
+          <!-- リクエストされたcategory_wordをコントローラーで受け取り$subCategory->idで表示
+       {{ $subCategory(sub_categoriesテーブルの各レコード)->sub_category(登録したサブカテゴリーの名前) }} -->
+          <span>{{ $subCategory->sub_category }}</span></a></li>
             @endforeach
             </ul>
         @endforeach

@@ -21,18 +21,27 @@ class PostsController extends Controller
      //public function 関数(引数)引数　とは関数に渡して処理の中でその値を使うことができるもの
 
     public function show(Request $request){
+        // dd($request->sub_category_id);
         $posts = Post::with('user','subCategories',  'postComments')->get();
         $categories = MainCategory::with('subCategories')->get();
         $like = new Like;
         $post_comment = new Post;
         $user = new User;
-        if(!empty($request->keyword)){
+        if(!empty($request->keyword)){ //投稿タイトル 本文 サブカテゴリーで検索
+            $keyword = $request->keyword;
             $posts = Post::with('user', 'subCategories', 'postComments')
             ->where('post_title', 'like', '%'.$request->keyword.'%')
-            ->orWhere('post', 'like', '%'.$request->keyword.'%')->get();
+            ->orWhere('post', 'like', '%'.$request->keyword.'%')
+            ->orWhereHas('subCategories', function($query) use ($keyword) { //検索条件にサブカテゴリー追加　subCategoriesはPostモデルのリレーション名
+                //function($query)はsubCategories(リレーション先のテーブル)に対するキーワード検索指定するため
+                $query->where('sub_categories.sub_category', $keyword);//'sub_category'はデータベースのカラム名
+            });
         }else if($request->category_word){
-            $sub_category = $request->category_word;
-            $posts = Post::with('user','subCategories',  'postComments')->get();
+            $sub_category = $request->category_word; //リクエストされたcategory_wordを$sub_category(変数)に入れる
+            $posts = Post::with('user','subCategories',  'postComments')
+            ->whereHas('subCategories', function ($query) use ($sub_category) {   // サブカテゴリー名の完全一致検索WhereHas
+                $query->where('sub_categories.id', $sub_category); // IDで完全一致検索->get();で表示させる
+            })->get();
         }else if($request->like_posts){
             $likes = Auth::user()->likePostId()->get('like_post_id');
             $posts = Post::with('user', 'subCategories', 'postComments')
@@ -46,7 +55,7 @@ class PostsController extends Controller
             $post->like_count = Like::likeCounts($post->id);
             $post->comments_count = $post->postComments()->count();
         }
-        // dd($categories);
+        // dd( $sub_category_id);
         return view('authenticated.bulletinboard.posts', compact('posts', 'categories', 'like', 'post_comment'));
     }
 
@@ -150,23 +159,5 @@ class PostsController extends Controller
              return response()->json();
     }
 
-    //投稿検索
-    public function postSearch(Request $request){
-        $posts = Post::get();
-        $keyword = $request->input('keyword'); //キーワードを取得
-        if(!empty($keyword)){
-            if (!empty($keyword)) {
-                $posts->where('post_title', 'LIKE', "%" . $keyword . "%")
-                      ->orWhere('post_body', 'LIKE', "%" . $keyword . "%")
-                      ->orWhereHas('subCategories', function($query) use ($keyword) {
-                        // サブカテゴリー名の完全一致検索
-                        $query->where('sub_category', $keyword);
-                      });
-                    }
 
-                    $posts = $posts->get();
-        
-        return view('authenticated.bulletinboard.posts', compact('posts','keyword'));
-    }
-}
 }
