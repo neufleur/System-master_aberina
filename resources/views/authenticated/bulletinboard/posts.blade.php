@@ -60,8 +60,6 @@
            <!--  $categoryに関連付けられた全てのサブカテゴリーの各サブカテゴリーを$subCategory変数に入れる -->
         <li class="sub_category" sub_category_id="{{ $subCategory->id }}">
         <a href="{{ route('post.show', ['category_word' => $subCategory->id]) }}">
-          <!-- リクエストされたcategory_wordをコントローラーで受け取り$subCategory->idで表示
-       {{ $subCategory(sub_categoriesテーブルの各レコード)->sub_category(登録したサブカテゴリーの名前) }} -->
           <span>{{ $subCategory->sub_category }}</span></a></li>
             @endforeach
             </ul>
