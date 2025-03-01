@@ -72,16 +72,23 @@ class User extends Authenticatable
         // return $this->belongsToMany('⓵Subjectsの場所', '⓶中間テーブル', '⓷自分のidが入る' ④相手モデルに関係しているid);
     }
 
-
+        //いいねしているかどうかを判定
     public function is_Like($post_id) {
         return $this->likes()->where('like_post_id', $post_id)->exists();
     }
-
+        //ユーザーがしたいいねlikesテーブルのデータを取得 ログインユーザ-idとlikesテーブルのlike_user_idを紐づけ
     public function likes() {
          return $this->hasMany(Like::class, 'like_user_id');
         }
+        //いいねしたlikesレコード取得
+        public function likedPosts(){ //ユーザーが「いいね」した投稿のデータを取得するidがlike_user_idに一致するlikesレコードを取得
+            return $this->hasMany(Like::class, 'like_user_id', 'id');
+        }
 
-
+        // いいねした投稿のIDだけを取得
+        public function likePostIds() {
+            return $this->hasMany(Like::class, 'like_user_id')->pluck('like_post_id'); // 'like_post_id' カラムを取得
+        }
 //ログイン済み、且つadmin権限を持つユーザーのみが閲覧できるページを作成⓵
 public function isTeacher() {
    return in_array($this->role, [1, 2, 3]); // 教師の役職を配列で定義

@@ -36,6 +36,7 @@ class PostsController extends Controller
                 //function($query)はsubCategories(リレーション先のテーブル)に対するキーワード検索指定するため
                 $query->where('sub_categories.sub_category', $keyword);//'sub_category'はデータベースのカラム名
             });
+            $posts = $posts->get();
         }else if($request->category_word){
             $sub_category = $request->category_word; //リクエストされたcategory_wordを$sub_category(変数)に入れる
             $posts = Post::with('user','subCategories',  'postComments')
@@ -43,7 +44,7 @@ class PostsController extends Controller
                 $query->where('sub_categories.id', $sub_category); // IDで完全一致検索->get();で表示させる
             })->get();
         }else if($request->like_posts){
-            $likes = Auth::user()->likePostId()->get('like_post_id');
+            $likes = Like::where('like_user_id', Auth::id())->pluck('like_post_id'); //いいねしたlike_post_idだけを取得　pluckとは特定のカラムの値だけを取り出すメソッド
             $posts = Post::with('user', 'subCategories', 'postComments')
             ->whereIn('id', $likes)->get();
         }else if($request->my_posts){

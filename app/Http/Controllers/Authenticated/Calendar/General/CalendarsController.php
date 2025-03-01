@@ -65,7 +65,7 @@ class CalendarsController extends Controller
 
     public function delete(Request $request)
     {
-        Log::debug('リクエストデータ:', $request->all());
+        dd($request->all());
         //ユーザーがキャンセルしたい日付、部数取得
         $reserveDate = $request->input('delete_date');
         $reservePart = $request->input('delete_part');
