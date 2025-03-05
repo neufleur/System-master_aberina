@@ -12,7 +12,7 @@ class ReserveSettings extends Model
     protected $fillable = [
         'setting_reserve',
         'setting_part',
-        'limit_users',
+        'limit_users', // その部数に予約可能な残り人数
     ];
 //予約 reserveした部数
     public function users(){

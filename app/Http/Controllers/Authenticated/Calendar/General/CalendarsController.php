@@ -11,7 +11,7 @@ use App\Models\Users\User;
 use Auth;
 use DB;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Log;
+
 
 
 //スクール予約画面
@@ -65,10 +65,15 @@ class CalendarsController extends Controller
 
     public function delete(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
+        // dd(ReserveSettings::all()->toArray()); ReserveSettingsのすべてのレコードのカラムの値が配列で表示される
         //ユーザーがキャンセルしたい日付、部数取得
         $reserveDate = $request->input('delete_date');
         $reservePart = $request->input('delete_part');
+
+        //文字列をデータベースの数値と対応させる配列（マッピング）
+        $partMapping = ['リモ1部' => 1, 'リモ2部' => 2, 'リモ3部' => 3];
+        $reservePartNumber = $partMapping[$reservePart] ?? null; // 対応する数値を取得 なければ null
 
         $userId = auth()->id();
         $user = User::find($userId);
@@ -77,7 +82,7 @@ class CalendarsController extends Controller
         if ($user && $reserveDate && $reservePart) {
             // 予約設定を、指定された日付と部数で取得　$reserveDateとデータベースのsetting_reserve一致するかどうか
             $reservationToCancel = ReserveSettings::whereDate('setting_reserve', '=', Carbon::parse($reserveDate)->toDateString())
-                ->where('setting_part', $reservePart)
+                ->where('setting_part',$reservePartNumber)
                 ->first();
     
             if ($reservationToCancel) {
@@ -86,6 +91,7 @@ class CalendarsController extends Controller
                 // キャンセル時に空き枠を増やす
                 $reservationToCancel->increment('limit_users');
             }
+
         }
         return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
     }
