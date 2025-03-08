@@ -133,6 +133,95 @@ td.past-day {
   color:red;
 }
 
+.other_area{
+  padding: 20px;
+}
+.board_area{
+  justify-content: flex-start;
+}
+
+.post_view{
+  padding-left: 100px;
+}
+.post-user{
+  color: #999999;
+  font-weight: bold;
+}
+.post-title{
+  color: #000;
+  font-size: 16px;
+}
+.post-title a:hover{
+  color: #000;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.other_area{
+  width: 30%;
+  padding:60px;
+}
+/* padding: 上 右 下 左; */
+.post_create{
+  padding: 8px;
+  background-color:#03AAD2;
+  font-size: 18px;
+  border-radius:10px;
+  text-align:center;
+  margin-bottom: 25px;
+}
+.post_create a{
+  color: #FFF;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+}
+.post_create a:hover{
+  color: #FFF;
+  text-decoration: none;
+}
+
+.post_search{
+  border-radius:5px;
+  border-color:#ECF1F6;
+  font-size: 17px;
+  border-top-left-radius:10px;
+  border-bottom-left-radius:10px;
+  background-color: #ECF1F6;
+  padding: 8px;
+  padding-right: 40px;
+}
+.post_search_button{
+  background-color:#03AAD2;
+  border-color: #03AAD2;
+  color: #fff;
+  padding: 8px;
+  padding-right: 24px;
+  border-top-right-radius:10px;
+  border-bottom-right-radius:10px;
+  margin-bottom: 25px;
+}
+
+.category_btn_like{
+color: #fff;
+padding: 8px 18px 8px 18px;
+background-color:#FF97C2;
+border-color:#FF97C2;
+border-radius: 8px;
+}
+.category_btn_my{
+  color: #fff;
+  padding: 8px 32px 8px 32px;
+  background-color: #FFCC66;
+  border-color:#FFCC66;
+  border-radius: 8px;
+}
+.categories{
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+
 /* 掲示板 詳細画面 */
 .contributor{
   font-size:12px;

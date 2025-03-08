@@ -48,20 +48,6 @@ class CalendarsController extends Controller
         }
         return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
     }
-    // public function delete(Request $request)
-    // {
-        
-    //     $reserveId = $request->input('delete_date');
-    //       // 例として、対象ユーザーのIDが取得できている前提
-    // $userId = auth()->id();
-
-    // // Userモデルのリレーションから対象の予約設定を解除（detach）
-    // $user = User::find($userId);
-    // if ($user) {
-    //     $user->reserveSettings()->detach($reserveId);
-    // }
-    // return redirect()->back();
-    //     }
 
     public function delete(Request $request)
     {
