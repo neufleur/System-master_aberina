@@ -8,12 +8,26 @@
     <div class="post_area border w-80 p-3">
       <p class="post-user"><span>{{ $post->user->over_name }}</span><span class="ml-3">{{ $post->user->under_name }}</span>さん</p>
       <p class="post-title"><a href="{{ route('post.detail', ['id' => $post->id]) }}" class="post-title">{{ $post->post_title }}</a></p>
+        <!-- 投稿の選択したサブカテゴリー表示 -->
       <div class="post_bottom_area d-flex">
         <div class="d-flex post_status">
-          <div class="mr-5">
+        <div class="post_sub_category">
+          <ul>
+            <!-- foreachで現在表示している投稿に関連するサブカテゴリーを取得 subCategoriesはリレーションで定義されたbelongsToMany() -->
+          @foreach($post->subCategories as $subCategory)
+            <li class="sub_category" sub_category_id="{{ $subCategory->id }}">
+            <span>{{ $subCategory->sub_category }}</span></li>
+            <!-- $subCategoryはサブカテゴリーの1つのレコード sub_categoryカラム-->
+          @endforeach
+            </ul>
+            </div>
+            </div>
+          <!-- いいねコメント -->
+            <div class="comment_like">
+          <div class="counts_comment">
             <i class="fa fa-comment"></i><span class="">{{ $post->comments_count }}</span>
           </div>
-          <div class="counts">
+          <div class="counts_like">
             @if(Auth::user()->is_Like($post->id))
             <p class="m-0"><i class="fas fa-heart un_like_btn" post_id="{{ $post->id }}"></i>
             <span class="like_counts like_counts{{ $post->id }}">{{ $post->like_count }}</span>
@@ -24,17 +38,7 @@
 
             @endif
           </div>
-          <!-- 投稿の選択したサブカテゴリー表示 -->
-          <div>
-          <ul>
-            <!-- foreachで現在表示している投稿に関連するサブカテゴリーを取得 subCategoriesはリレーションで定義されたbelongsToMany() -->
-          @foreach($post->subCategories as $subCategory)
-            <li class="sub_category" sub_category_id="{{ $subCategory->id }}">
-            <span>{{ $subCategory->sub_category }}</span></li>
-            <!-- $subCategoryはサブカテゴリーの1つのレコード sub_categoryカラム-->
-          @endforeach
-            </ul>
-            </div>
+        
         </div>
       </div>
     </div>
