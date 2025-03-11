@@ -62,7 +62,7 @@
             <!-- メインの中にサブ表示できるように -->
            @foreach($category->subCategories as $subCategory)
            <!--  $categoryに関連付けられた全てのサブカテゴリーの各サブカテゴリーを$subCategory変数に入れる -->
-        <li class="sub_category" sub_category_id="{{ $subCategory->id }}">
+        <li class="sub_category_search" sub_category_id="{{ $subCategory->id }}">
         <a href="{{ route('post.show', ['category_word' => $subCategory->id]) }}">
           <span>{{ $subCategory->sub_category }}</span></a></li>
             @endforeach

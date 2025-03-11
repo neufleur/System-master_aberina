@@ -225,7 +225,8 @@ border-radius: 8px;
 }
 .categories{
   margin-top: 20px;
-  font-size: 18px;
+  font-size: 20px;
+  color: #444444;
 }
 
 .counts_comment,
@@ -314,11 +315,16 @@ border-radius: 8px;
 .sub_category li input{
   list-style:none;
   cursor:pointer;
+  font-size: 20px;
+  color: #444444;
 
 }
 .main_category {
   color: #000;
  font-weight: 15px;
+}
+li.main_categories {
+border-bottom: 1.5px solid #666666;
 }
 
 li.sub_category {
@@ -328,18 +334,21 @@ li.sub_category {
   border-radius: 13px;
   padding: 8px;
   font-size: 12px;
-
-}
-.sub_category {
-  font-size:12px;
-  border-radius:5px;
-  padding:2px 13px;
   border:none;
   display: inline;
-  background-color:#999;
   color:#FFF;
 }
 
+li.sub_category_search {
+  border-bottom: 1.5px solid #666666;
+}
+
+li.sub_category_search a{
+  color: #444444;
+  text-decoration: none;
+}
+
+/* search アコーディオンメニュー */
 
 /* ユーザー検索 */
 .reserve_users_area{
