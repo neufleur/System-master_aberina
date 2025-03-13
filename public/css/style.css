@@ -315,17 +315,25 @@ border-radius: 8px;
 .sub_category li input{
   list-style:none;
   cursor:pointer;
-  font-size: 20px;
+  font-size: 18px;
   color: #444444;
+  position: relative;
+  height: 30px;
+
 
 }
 .main_category {
   color: #000;
  font-weight: 15px;
+
 }
 li.main_categories {
 border-bottom: 1.5px solid #666666;
+display: flex;
+justify-content: space-between;
+padding: 7px;
 }
+
 
 li.sub_category {
   list-style:none;
@@ -341,6 +349,7 @@ li.sub_category {
 
 li.sub_category_search {
   border-bottom: 1.5px solid #666666;
+  padding: 4px;
 }
 
 li.sub_category_search a{
@@ -349,6 +358,35 @@ li.sub_category_search a{
 }
 
 /* search アコーディオンメニュー */
+.nav-btn{
+  position: relative;
+	height: 50px;
+	color:  #444444;
+	text-align: center;
+	line-height: 50px;
+	cursor: pointer;
+}
+.nav-btn::after{
+  content: "";
+	display: inline-block;
+	position: absolute;
+	top: 45%;
+	width: 10px;
+	height: 10px;
+	border-right: 2px solid  #444444;
+	border-bottom: 2px solid  #444444;
+	transform: translateY(-50%) rotate(45deg);
+	transition: .3s;
+
+}
+.nav-btn.open::after {
+  transform: translateY(-50%) rotate(-135deg);
+}
+/* サブカテゴリーは最初非表示 */
+.sub_category_list {
+  display: none;
+  padding-left: 20px;
+}
 
 /* ユーザー検索 */
 .reserve_users_area{

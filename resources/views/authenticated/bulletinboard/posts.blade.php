@@ -52,13 +52,14 @@
       </div>
       <input type="submit" name="like_posts" class="category_btn_like" value="いいねした投稿" form="postSearchRequest">
       <input type="submit" name="my_posts" class="category_btn_my" value="自分の投稿" form="postSearchRequest">
-          <ul>
+         
             <p class="categories">カテゴリー検索</p>
+            <ul>
         @foreach($categories as $category)
         <!-- カテゴリー全てforeachで呼び出す -->
-        <li class="main_categories" category_id="{{ $category->id }}"><span>{{ $category->main_category }}</span></li>
-         </ul>
-          <ul>
+      <li class="main_categories" category_id="{{ $category->id }}"> <span>{{ $category->main_category }}</span><span class="nav-btn"></span></li>
+
+          <ul class="sub_category_list">
             <!-- メインの中にサブ表示できるように -->
            @foreach($category->subCategories as $subCategory)
            <!--  $categoryに関連付けられた全てのサブカテゴリーの各サブカテゴリーを$subCategory変数に入れる -->
@@ -69,6 +70,7 @@
             </ul>
         @endforeach
         </li>
+        </ul>
     </div>
   </div>
   <form action="{{ route('post.show') }}" method="get" id="postSearchRequest"></form>
