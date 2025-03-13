@@ -223,9 +223,10 @@ border-radius: 8px;
   border-color:#FFCC66;
   border-radius: 8px;
 }
-.categories{
+.categories,
+.search_conditions{
   margin-top: 20px;
-  font-size: 20px;
+  font-size: 18px;
   color: #444444;
 }
 
@@ -327,7 +328,8 @@ border-radius: 8px;
  font-weight: 15px;
 
 }
-li.main_categories {
+li.main_categories,
+.search_conditions {
 border-bottom: 1.5px solid #666666;
 display: flex;
 justify-content: space-between;
@@ -387,18 +389,17 @@ li.sub_category_search a{
   display: none;
   padding-left: 20px;
 }
-
+/* padding: 上 右 下 左; */
 /* ユーザー検索 */
 .reserve_users_area{
   display:flex;
   flex-wrap:wrap;
-  width:800px;
-  margin:10px auto;
-  height:80vh;
+  width:85%;
+  margin:17px 0px 20px 35px;
+  height:65vh;
   overflow: scroll;
   padding:10px;
-  background:#FFF;
-  border-radius:5px;
+  gap: 20px;
 }
 .reserve_users_area span{
   font-size:12px;
@@ -406,6 +407,14 @@ li.sub_category_search a{
 .one_person{
   width:250px;
   height:250px;
+  background-color: #fff;
+  border-radius:10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+    font-size: 20px;
+}
+.myself{
+  color: #9E9E9E;
 }
 .search_conditions span{
   cursor:pointer;
@@ -422,7 +431,60 @@ li.sub_category_search a{
 .subject_inner{
   display:none;
 }
+.search_area{
+  padding: 80px 30px 0px 10px;
+}
+.just_search{
+  font-size: 20px;
+  color: #666666;
+}
+.free_word{
+  border-color:#F5F5F5;
+  font-size: 17px;
+  border-radius:10px;
+  background-color: #DDDDDD;
+  padding: 9px 90px 9px 9px;
+  padding-right: 40px;
+}
+.category_name_id{
+  font-size: 17px;
+  margin-top: 25px;
+  color: #666666;
+  display: block;
+}
+.up_down{
+  font-size: 17px;
+  margin-top: 25px;
+  color: #666666;
+  padding-bottom: 15px;
+  display: block;
+}
+.name_id{
+  outline: 0;
+  padding: 5px;
+    border-radius: 8px;
+    background-color: #DDDDDD;
+    border:1px solid #DDDDDD;
+    margin-top: 8px;
+    display: block;
+}
+.up{
+  outline: 0;
+  padding: 5px 22px 5px 5px;
+    border-radius: 8px;
+    background-color: #DDDDDD;
+    border:1px solid #DDDDDD;
+    display: block;
+}
+.search_conditions{
+  list-style:none;
+  cursor:pointer;
+  font-size: 18px;
+  color: #444444;
+  position: relative;
+  height: 40px;
 
+}
 /* 予約機能　スクール予約*/
 
 /*  キャンセルモーダル*/

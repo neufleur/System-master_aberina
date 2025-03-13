@@ -27,8 +27,9 @@ class CalendarsController extends Controller
         DB::beginTransaction();
         try{
             //部数日付格納する
-            $getPart = $request->getPart;
             $getDate = $request->getData;
+            $getPart = $request->getPart;
+            
             // 素数が異なる場合、不足分を "" で埋めて空欄の日付を同じ数の配列のように埋める
                 if (count($getPart) < count($getDate)) {
                     $getPart = array_pad($getPart, count($getDate), "");
