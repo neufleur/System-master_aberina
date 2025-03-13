@@ -41,3 +41,14 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 });
+
+// ユーザー検索時のアコーディオンメニュー
+document.addEventListener("DOMContentLoaded", function () {
+  const searchConditions = document.querySelector(".search_conditions");
+  const searchInner = document.querySelector(".search_conditions_inner");
+
+  searchConditions.addEventListener("click", function () {
+    searchConditions.classList.toggle("active");
+    searchInner.classList.toggle("open");
+  });
+});

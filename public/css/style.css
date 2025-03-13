@@ -485,6 +485,9 @@ li.sub_category_search a{
   height: 40px;
 
 }
+.search_conditions.active .nav-btn::after {
+  transform: translateY(-50%) rotate(225deg);
+}
 /* 予約機能　スクール予約*/
 
 /*  キャンセルモーダル*/
