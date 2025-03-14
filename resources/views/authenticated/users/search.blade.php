@@ -75,13 +75,15 @@
       <div class="">
         <p class="m-0 search_conditions"><span>検索条件の追加</span><span class="nav-btn" style="height: 25px;"></span></p>
         <div class="search_conditions_inner">
-          <div>
+          <div class="sex123">
             <label>性別</label>
-            <span>男</span><input type="radio" name="sex" value="1" form="userSearchRequest">
-            <span>女</span><input type="radio" name="sex" value="2" form="userSearchRequest">
-            <span>その他</span><input type="radio" name="sex" value="3" form="userSearchRequest">
+            <div class="s-group">
+            <span class="sex">男</span><input type="radio" name="sex" value="1" form="userSearchRequest">
+            <span class="sex">女</span><input type="radio" name="sex" value="2" form="userSearchRequest">
+            <span class="sex">その他</span><input type="radio" name="sex" value="3" form="userSearchRequest">
+            </div>
           </div>
-          <div>
+          <div class="role1234">
             <label>権限</label>
             <select name="role" form="userSearchRequest" class="engineer">
               <option selected disabled>----</option>
@@ -95,18 +97,20 @@
             <label>選択科目</label>
               <!--subject 単数で表示  -->
               <!-- <option selected disabled>----</option> -->
+              <div class="selected">
               <span>国語</span><input type="checkbox" name="subjects[]" value="1" form="userSearchRequest">
               <span>数学</span><input type="checkbox" name="subjects[]" value="2" form="userSearchRequest">
               <span>英語</span><input type="checkbox" name="subjects[]" value="3" form="userSearchRequest">
             </select>
+            </div>
           </div>
         </div>
       </div>
       <div>
-      <input type="submit" name="search_btn" value="検索" form="userSearchRequest">
+      <input type="submit" name="search_btn" value="検索" form="userSearchRequest" class="search_btn">
       </div>
       <div>
-      <input type="reset" value="リセット" form="userSearchRequest">
+      <input type="reset" value="リセット" form="userSearchRequest" class="reset_btn">
       </div>
     </div>
     <form action="{{ route('user.show') }}" method="get" id="userSearchRequest"></form>

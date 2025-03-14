@@ -488,6 +488,65 @@ li.sub_category_search a{
 .search_conditions.active .nav-btn::after {
   transform: translateY(-50%) rotate(225deg);
 }
+.sex123{
+  background-color: #ECF1F6;
+  padding-top: 20px;
+  font-size: 18px;
+  flex-direction: column;
+  color: #666666;
+}
+.s-group{
+  display: flex;
+  gap: 7px;
+  color: #444444;;
+}
+.role1234{
+  background-color: #ECF1F6;
+  padding-top: 20px;
+  font-size: 18px;
+  display: block;
+  color: #666666;
+}
+.engineer{
+  display: block;
+  outline: 0;
+  padding: 5px;
+  border-radius: 8px;
+  background-color: #DDDDDD;
+  border:1px solid #DDDDDD;
+  display: block;
+}
+.selected_engineer{
+  padding-top: 20px;
+  background-color: #ECF1F6;
+  color: #666666;
+  font-size: 18px;
+  display: block;
+}
+.selected{
+display: flex;
+color: #444444;
+gap: 7px;
+}
+.search_btn{
+  cursor:pointer;
+  background-color: #03AAD2;
+  border-radius: 8px;
+  padding: 10px 110px 10px 110px;
+  font-size: 18px;
+  border:none;
+  display: inline;
+  color:#FFF;
+  margin: 30px 30px 30px 0px;
+}
+.reset_btn{
+  color: #03AAD2;
+  font-size: 18px;
+  border: none;
+  background-color: #ECF1F6;
+  position: relative;
+  left: 90px;
+}
 /* 予約機能　スクール予約*/
 
 /*  キャンセルモーダル*/
