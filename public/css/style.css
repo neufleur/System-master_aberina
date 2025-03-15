@@ -112,6 +112,7 @@ td.past-day {
 }
 .detail_container{
   background:#FFF;
+  border-radius: 10px;
 }
 .post_area{
   background:#FFF;
@@ -247,15 +248,15 @@ border-radius: 8px;
 
 /* 掲示板 詳細画面 */
 .contributor{
-  font-size:12px;
+  font-size:15px;
   color:#999;
   font-weight:bold;
 }
 .detsail_post_title{
-  font-size:14px;
+  font-size:15px;
 }
 .detsail_post{
-  font-size:12px;
+  font-size:15px;
   color:#9E9E9E;
 }
 .detail_inner_head{
@@ -264,6 +265,23 @@ border-radius: 8px;
 }
 .edit-modal-open{
   cursor:pointer;
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 4px;
+  padding: 8px 14px 8px 14px;
+  font-size: 15px;
+  position: relative;
+  right: 10px;
+}
+.delete-post{
+  cursor:pointer;
+  color: #fff;
+  background-color: #E2254D;
+  border-radius: 4px;
+  padding: 8px 14px 8px 14px;
+  font-size: 15px;
+  position: relative;
+    right: 10px;
 }
 .modal-inner-body textarea{
   height:150px;
@@ -272,14 +290,27 @@ border-radius: 8px;
 .edit-modal-btn{
   justify-content: space-between;
 }
+.comment-btn {
+  color: #fff;
+  background-color: #007bff;
+  font-weight: bold;
+  border-color: #0000FF;
+}
+
 /* 掲示板 コメント */
 .comment_container{
   background:#FFF;
+  border-radius: 10px;
 }
-.comment_area p,
+.comment_area p{
+  font-size:12px;
+  font-weight:bold;
+}
 .comment_area input{
   font-size:12px;
   font-weight:bold;
+  position: relative;
+  left: 90%;
 }
 .comment_area textarea{
   height:300px;
@@ -537,7 +568,7 @@ gap: 7px;
   border:none;
   display: inline;
   color:#FFF;
-  margin: 30px 30px 30px 0px;
+  margin: 30px 30px 30px 5px;
 }
 .reset_btn{
   color: #03AAD2;

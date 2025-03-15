@@ -5,13 +5,21 @@
     <div class="m-3 detail_container">
       <div class="p-3">
         <div class="detail_inner_head">
-          <div>
-          </div>
+        <div class="post_sub_category">
+          <ul>
+            <!-- foreachで現在表示している投稿に関連するサブカテゴリーを取得 subCategoriesはリレーションで定義されたbelongsToMany() -->
+          @foreach($post->subCategories as $subCategory)
+            <li class="sub_category" sub_category_id="{{ $subCategory->id }}">
+            <span>{{ $subCategory->sub_category }}</span></li>
+            <!-- $subCategoryはサブカテゴリーの1つのレコード sub_categoryカラム-->
+          @endforeach
+            </ul>
+            </div>
           <div>
             <!-- ログイン中のユーザーの投稿にのみ編集、削除ボタンを表示 -->
           @if(Auth::user()->id ==$post->user_id)
             <span class="edit-modal-open" post_title="{{ $post->post_title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}">編集</span>
-            <a href="{{ route('post.delete', ['id' => $post->id]) }}" onclick="return confirm('こちらの投稿を削除します。よろしいでしょうか？')">削除</a>
+            <a href="{{ route('post.delete', ['id' => $post->id]) }}" onclick="return confirm('こちらの投稿を削除します。よろしいでしょうか？')" class="delete-post">削除</a>
             @endif
           </div>
         </div>
