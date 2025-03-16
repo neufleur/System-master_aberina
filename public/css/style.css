@@ -595,3 +595,18 @@ gap: 7px;
   width: 100%;
   cursor: pointer;
 }
+.calendar.text-center{
+  padding-bottom:20px;
+  background-color: #fff;
+  text-align: center;
+}
+.text-s-center{
+font-size: 18px;
+text-align: center;
+margin-top: 10px;
+}
+.calendar-container {
+  transform: scale(0.95); /* 全体を85%に縮小 */
+  transform-origin: top center; /* スケーリングの基準位置 */
+
+}

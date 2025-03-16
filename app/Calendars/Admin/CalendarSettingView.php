@@ -17,8 +17,9 @@ class CalendarSettingView{
 
   public function render(){
     $html = [];
-    $html[] = '<div class="calendar text-center">';
-    $html[] = '<table class="table m-auto border adjust-table">';
+    $html[] = '<div class="calendar text-center" style="max-width: 100%;">';
+    $html[] = '<div class="calendar-wrapper" style="overflow-x: auto;">';
+    $html[] = '<table class="table m-auto border adjust-table" style="min-width: 100%;">';
     $html[] = '<thead>';
     $html[] = '<tr>';
     $html[] = '<th class="border">月</th>';
@@ -66,6 +67,7 @@ class CalendarSettingView{
     }
     $html[] = '</tbody>';
     $html[] = '</table>';
+    $html[] = '</div>';
     $html[] = '</div>';
     $html[] = '<form action="' . route('calendar.admin.update') . '" method="post" id="reserveSetting">' . csrf_field() . '</form>';
 
