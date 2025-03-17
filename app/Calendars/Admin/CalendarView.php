@@ -17,8 +17,9 @@ class CalendarView{
 
   public function render(){
     $html = [];
-    $html[] = '<div class="calendar text-center">';
-    $html[] = '<table class="table m-auto border">';
+    $html[] = '<div class="calendar text-center" style="max-width: 100%;">';
+    $html[] = '<div class="calendar-wrapper" style="overflow-x: auto;">';
+    $html[] = '<table class="table m-auto border adjust-table" style="min-width: 100%;">';
     $html[] = '<thead>';
     $html[] = '<tr>';
     $html[] = '<th class="border">月</th>';
@@ -54,6 +55,8 @@ class CalendarView{
     $html[] = '</tbody>';
     $html[] = '</table>';
     $html[] = '</div>';
+    $html[] = '</div>';
+
 
     return implode("", $html);
   }
