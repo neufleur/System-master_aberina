@@ -13,12 +13,21 @@ li{
   list-style:none;
 }
 
+
 /* サイドバー */
 .sidebar{
   width:150px;
   height:100vh;
   background-color:#03AAD2;
   font-weight:bold;
+}
+.sidebar a {
+  text-decoration: none;
+  color: #fff;
+}
+.sidebar a:hover{
+  text-decoration: none;
+
 }
 .main-container{
   width:100%;
@@ -28,9 +37,13 @@ li{
 }
 
 /* トップページ */
-.user_status{
+.user_status_my_page{
   border-radius:10px;
   background:#FFF;
+  margin-left: 160px;
+margin-top: 30px;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
 }
 
 /* スクール予約関連 */
@@ -137,7 +150,7 @@ td.past-day {
 }
 
 .error_message{
-  font-size:12px;
+  font-size:14px;
   color:red;
 }
 
@@ -282,6 +295,12 @@ border-radius: 8px;
   font-size: 15px;
   position: relative;
     right: 10px;
+}
+.delete-post:hover{
+  color: #fff;
+  background-color: #E2254D;
+  text-decoration: none;
+
 }
 .modal-inner-body textarea{
   height:150px;

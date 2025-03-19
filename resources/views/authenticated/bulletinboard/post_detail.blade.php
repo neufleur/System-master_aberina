@@ -4,6 +4,13 @@
   <div class="w-50 mt-5">
     <div class="m-3 detail_container">
       <div class="p-3">
+      @if($errors->first('post_title'))
+      <span class="error_message">{{ $errors->first('post_title') }}</span>
+      @endif
+      @if($errors->first('post_body'))
+      <span class="error_message">{{ $errors->first('post_body') }}</span>
+      @endif
+
         <div class="detail_inner_head">
         <div class="post_sub_category">
           <ul>
@@ -54,13 +61,16 @@
   <div class="w-50 p-3">
     <div class="comment_container border m-5">
       <div class="comment_area p-3">
+      @if($errors->first('comment'))
+      <span class="error_message">{{ $errors->first('comment') }}</span>
+      @endif
         <p class="m-0">コメントする</p>
         <form action="{{ route('comment.create') }}" method="post" id="commentRequest">{{ csrf_field() }}
         @csrf
         <textarea class="w-100" name="comment" form="commentRequest">{{ old('comment') }}</textarea>
         <input type="hidden" name="post_id" form="commentRequest" value="{{ $post->id }}">
         <input type="submit" class="btn btn-primary" form="commentRequest" value="投稿">
-    @if($errors->any())
+    <!-- @if($errors->any())
          <div class="alert alert-danger">
            <ul>
                @foreach($errors->all() as $error)
@@ -68,7 +78,7 @@
                @endforeach
             </ul>
          </div>
-         @endif
+         @endif -->
         </form>
       </div>
     </div>
@@ -79,15 +89,6 @@
   <div class="modal__content">
     <form action="{{ route('post.edit') }}" method="post">
     @csrf
-    @if($errors->any())
-         <div class="alert alert-danger">
-           <ul>
-               @foreach($errors->all() as $error)
-             <li>{{ $error }}</li>
-               @endforeach
-            </ul>
-         </div>
-         @endif
       <div class="w-100">
         <div class="modal-inner-title w-50 m-auto">
         <input type="hidden" class="edit-modal-hidden" name="post_id" value="{{ $post->id }}">

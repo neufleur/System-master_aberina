@@ -29,7 +29,7 @@ class CalendarsController extends Controller
             //部数日付格納する
             $getDate = $request->getData;
             $getPart = $request->getPart;
-            
+
             // 素数が異なる場合、不足分を "" で埋めて空欄の日付を同じ数の配列のように埋める
                 if (count($getPart) < count($getDate)) {
                     $getPart = array_pad($getPart, count($getDate), "");
@@ -37,11 +37,15 @@ class CalendarsController extends Controller
                     $getDate = array_pad($getDate, count($getPart), "");
                 }
 //フォームから送信された日付の配列$getDateと部数の配列$getPartを組み合わせて
+            // $reserveDays = array_combine($getDate, $getPart);
             $reserveDays = array_filter(array_combine($getDate, $getPart));
+            // dd($reserveDays);
             foreach($reserveDays as $key => $value){
                 $reserve_settings = ReserveSettings::where('setting_reserve', $key)->where('setting_part', $value)->first();
                 $reserve_settings->decrement('limit_users'); //取得した予約設定レコードの limit_users カラムの値を1減らす
                 $reserve_settings->users()->attach(Auth::id());
+            
+            
             }
             DB::commit();
         }catch(\Exception $e){
