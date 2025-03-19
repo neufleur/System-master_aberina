@@ -68,9 +68,9 @@ td.past-day {
   width:70%;
 }
 .reserved-day {
-  background-color: #ffcccc; /* 赤背景 */
-  color: #000; /* 文字色を黒に */
-  border-radius: 5px; /* 丸みを少し追加 */
+  background-color: #ffcccc;
+  color: #000;
+  border-radius: 5px;
   padding: 5px;
 }
 /* モーダル */
@@ -322,7 +322,43 @@ border-radius: 8px;
 .post_status span{
   font-size:12px;
 }
+/* 予約した人の詳細画面 */
+.reservePersons{
+  padding: 8px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+.text-center-title{
+  background-color: #03AAD2;
+  color: #fff;
+  text-align: center;
+}
+/* 偶数は水色 nth-childはtr要素に適用される */
+.text-center-detail:nth-child(even) {
+  background-color:#d9f1ff;
+}
+.text-center-detail:nth-child(even) td {
+  border: 1px solid #9E9E9E; /* td に枠線を適用 */
+  border-spacing: 0;
+  overflow: hidden;
+}
+/*first-child=id  */
+.text-center-detail td:first-child {
+  border-right: none;
+}
+/* 名前の列の左右の枠線を消す */
+.text-center-detail td:nth-child(2) {
+  border-left: none;
+  border-right: none;
+}
+.text-center-detail td:last-child {
+  border-left: none;
+}
 
+/* 奇数は白 */
+.text-center-detail:nth-child(odd) {
+  background-color: #fff;
+}
 /* 掲示板　カテゴリー */
 .category_area{
   background:#FFF;
@@ -444,6 +480,7 @@ li.sub_category_search a{
   padding: 20px;
     font-size: 20px;
 }
+
 .myself{
   color: #9E9E9E;
 }
@@ -454,13 +491,46 @@ li.sub_category_search a{
   display:none;
   background:#FFF;
 }
+/* プロフィール詳細 */
+.user-pro{
+  font-size: 18px;
+  padding: 15px 0px 15px 20px;
+}
+.user_status{
+margin-left: 160px;
+margin-top: 20px;
+padding: 20px 50px 20px 30px;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+}
 .subject_edit_btn{
-  font-size:12px;
-  color:#0000FF;
+  font-size:15px;
+  color: #03AAD2;
   cursor:pointer;
 }
 .subject_inner{
   display:none;
+}
+/* プロフィールnav.btn */
+.page-specific .nav-btn::after {
+  content: "";
+	display: inline-block;
+	position: absolute;
+	top: 45%;
+	width: 10px;
+	height: 10px;
+  border-right: 2px solid #03AAD2 ;
+  border-bottom: 2px solid  #03AAD2 ;
+  transform: translateY(-50%) rotate(45deg);
+	transition: .3s;
+}
+/* activeされた時逆さま  */
+.page-specific .nav-btn.active::after  {
+  transform: translateY(-50%) rotate(-135deg);
+}
+/* 開くときのアニメーション */
+.page-specific .nav-btn.active {
+  transform: rotate(180deg);
 }
 .search_area{
   padding: 80px 30px 0px 10px;

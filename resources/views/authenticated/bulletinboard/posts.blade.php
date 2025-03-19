@@ -51,7 +51,6 @@
       </div>
       <input type="submit" name="like_posts" class="category_btn_like" value="いいねした投稿" form="postSearchRequest">
       <input type="submit" name="my_posts" class="category_btn_my" value="自分の投稿" form="postSearchRequest">
-         
             <p class="categories">カテゴリー検索</p>
             <ul>
         @foreach($categories as $category)

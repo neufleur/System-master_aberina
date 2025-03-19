@@ -99,3 +99,16 @@ $(function () {
   });
 
 })
+
+// プロフィール　選択科目　nav.btn
+document.addEventListener("DOMContentLoaded", function () {
+  const navButton = document.querySelector(".nav-btn");
+  const subjectInner = document.querySelector(".subject_inner");
+
+  if (navButton && subjectInner) {
+    navButton.addEventListener("click", function () {
+      navButton.classList.toggle("active"); //activeした時に矢印逆にしてopen
+      subjectInner.classList.toggle("open");
+    });
+  }
+});
