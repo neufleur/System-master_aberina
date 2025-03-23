@@ -47,6 +47,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const searchConditions = document.querySelector(".search_conditions");
   const searchInner = document.querySelector(".search_conditions_inner");
 
+  if (!searchConditions || !searchInner) {
+    // 検索用の要素がなければ、処理をスキップ
+    return;
+  }
+
   searchConditions.addEventListener("click", function () {
     searchConditions.classList.toggle("active");
     searchInner.classList.toggle("open");

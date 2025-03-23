@@ -1,8 +1,6 @@
 @extends('layouts.sidebar')
 
 @section('content')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{{ asset('js/register.js') }}"></script>
 <div class="vh-100 pt-5" style="background:#ECF1F6;">
   <div class="border w-75 m-auto pt-5 pb-5" style="border-radius:10px; background:#FFF; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
     <div class="w-75 m-auto" style="border-radius:5px;">
@@ -25,4 +23,6 @@
 </div>
   </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ asset('js/register.js') }}"></script>
 @endsection
