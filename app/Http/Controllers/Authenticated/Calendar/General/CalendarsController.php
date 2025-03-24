@@ -26,33 +26,37 @@ class CalendarsController extends Controller
     public function reserve(Request $request){
         DB::beginTransaction();
         try{
-            
+
             //部数日付格納する
             $getDate = $request->getData;
             $getPart = $request->getPart;
 
-            // 素数が異なる場合、不足分を "" で埋めて空欄の日付を同じ数の配列のように埋める
-                if (count($getPart) < count($getDate)) { // もし$getPartの数が$getDateより少ない場合
-                    $getPart = array_pad($getPart, count($getDate), "0"); // $getPartを空文字で埋めて$getDateの数に合わせる
+            // dd([
+            //         'getDate' => $getDate,
+            //         'getPart' => $getPart,
+            //         'is_array(getDate)' => is_array($getDate),
+            //         'is_array(getPart)' => is_array($getPart),
+            //         'count(getDate)' => count($getDate),
+            //         'count(getPart)' => count($getPart),
+            //     ]);
+                // すでに getDate と getPart の長さが一致しているなら何もしない
+                if (count($getPart) < count($getDate)) {// もし$getPartの数が$getDateより少ない場合
+                    $getPart = array_pad($getPart, count($getDate), ""); // $getPartを空文字で埋めて$getDateの数に合わせる
                 } elseif (count($getPart) > count($getDate)) {
-                    $getDate = array_pad($getDate, count($getPart), "");
+                    $getPart = array_slice($getPart, 0, count($getDate)); // 余分なものはカット
                 }
-//foreach で$valueがnullまたは""の場合0に置き換えてる
+            //foreach で$valueがnullまたは""の場合0に置き換えてる
                 foreach ($getPart as $key => $value) {
                     if ($value === null || $value === "") {
                         $getPart[$key] = "0";
                     }
                 }
-//フォームから送信された日付の配列$getDateと部数の配列$getPartを組み合わせて
+
+                // dd($getPart);
+            //フォームから送信された日付の配列$getDateと部数の配列$getPartを組み合わせて
             // $reserveDays = array_combine($getDate, $getPart);
             $reserveDays = array_filter(array_combine($getDate, $getPart));
-            // dd([
-            //     'getDate' => $getDate,
-            //     'getPart' => $getPart,
-            //     'reserveDays' => $reserveDays,
-            //     'is_array(getDate)' => is_array($getDate),
-            //     'is_array(getPart)' => is_array($getPart),
-            // ]);
+
             // dd($reserveDays);
             foreach($reserveDays as $key => $value){
                 $reserve_settings = ReserveSettings::where('setting_reserve', $key)->where('setting_part', $value)->first();
@@ -70,7 +74,6 @@ class CalendarsController extends Controller
         }
         return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
     }
-
     public function delete(Request $request)
     {
         // dd($request->all());

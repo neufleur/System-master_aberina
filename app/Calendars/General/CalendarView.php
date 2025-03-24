@@ -33,6 +33,7 @@ class CalendarView{
     $html[] = '</thead>';
     $html[] = '<tbody>';
     $weeks = $this->getWeeks(); //週ごとのデータを保持 $weeks 配列の各要素（週）に対してループをする
+   
     foreach($weeks as $week){
       $html[] = '<tr class="'.$week->getClassName().'">';
 
@@ -94,9 +95,13 @@ if ($dayDate->isToday() || $dayDate->isFuture()) {
                 // 予約なし（受付終了を黒文字で表示）
                 $html[] = '<p class="m-auto p-0 w-75" style="font-size:14px; color: #222222;">受付終了</p>';
             }
+           
                 $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+            // }
                 $html[] = '</td>';
             }
+            // dd($day->getDate());
+            
 
         $html[] = $day->getDate();
         $html[] = '</td>';
