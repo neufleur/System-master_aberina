@@ -76,14 +76,15 @@ if ($dayDate->isToday() || $dayDate->isFuture()) {
           $html[] = '<input type="hidden" name="delete_date" value="' . $day->everyDay() . '">';
           $html[] = '<input type="hidden" name="delete_part" value="' . $reservePart . '">';
           $html[] = '</form>';
-
+          //予約済みのgetPart[]を送る記述　すべて31のgetPart[]で取得するには、すべての日付にこのコードがないといけない！！1つ目
+          $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
 
         }else {
         // // 予約なし（プルダウンメニューで選択可能）今日以降のみ選択可能（過去の日は選択肢を表示しない）
         $html[] = $day->selectPart($day->everyDay());
         }
-        }    //  ⓵
-            // 過去の日
+        }
+            // ⓵過去の日
             // if ($dayDate->isPast() && !$dayDate->isToday()) {
               elseif ($dayDate->isPast()){
             if (in_array($day->everyDay(), $day->authReserveDay())) {
@@ -95,7 +96,7 @@ if ($dayDate->isToday() || $dayDate->isFuture()) {
                 // 予約なし（受付終了を黒文字で表示）
                 $html[] = '<p class="m-auto p-0 w-75" style="font-size:14px; color: #222222;">受付終了</p>';
             }
-           
+           //予約してないgetPart[]を送る記述2つ目
                 $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
             // }
                 $html[] = '</td>';

@@ -34,10 +34,6 @@ class CalendarsController extends Controller
             // dd([
             //         'getDate' => $getDate,
             //         'getPart' => $getPart,
-            //         'is_array(getDate)' => is_array($getDate),
-            //         'is_array(getPart)' => is_array($getPart),
-            //         'count(getDate)' => count($getDate),
-            //         'count(getPart)' => count($getPart),
             //     ]);
                 // すでに getDate と getPart の長さが一致しているなら何もしない
                 if (count($getPart) < count($getDate)) {// もし$getPartの数が$getDateより少ない場合
@@ -63,10 +59,6 @@ class CalendarsController extends Controller
                 $reserve_settings->decrement('limit_users'); //取得した予約設定レコードの limit_users カラムの値を1減らす
                 $reserve_settings->users()->attach(Auth::id());
             }
-            // dd([
-            //     'before' => $reserve_settings->limit_users,
-            //     'after' => $reserve_settings->limit_users - 1
-            // ]);
             // dd($reserve_settings);
             DB::commit();
         }catch(\Exception $e){
@@ -74,6 +66,10 @@ class CalendarsController extends Controller
         }
         return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
     }
+
+
+
+
     public function delete(Request $request)
     {
         // dd($request->all());
