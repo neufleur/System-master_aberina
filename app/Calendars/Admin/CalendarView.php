@@ -27,8 +27,8 @@ class CalendarView{
     $html[] = '<th class="border">水</th>';
     $html[] = '<th class="border">木</th>';
     $html[] = '<th class="border">金</th>';
-    $html[] = '<th class="border">土</th>';
-    $html[] = '<th class="border">日</th>';
+    $html[] ='<th class="saturday">土</th>';
+    $html[] ='<th class="sunday">日</th>';
     $html[] = '</tr>';
     $html[] = '</thead>';
     $html[] = '<tbody>';
@@ -41,11 +41,22 @@ class CalendarView{
       foreach($days as $day){
         $startDay = $this->carbon->format("Y-m-01");
         $toDay = $this->carbon->format("Y-m-d");
-        if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-          $html[] = '<td class="past-day border">';
-        }else{
-          $html[] = '<td class="border '.$day->getClassName().'">';
+        $carbonDay = Carbon::parse($day->everyDay());
+        $dayOfWeek = $carbonDay->dayOfWeek; // 0(日曜) ～ 6(土曜)
+
+        $class = '';
+        if ($dayOfWeek === 6) {
+            $class = 'saturday'; // 土曜のクラス
+        } elseif ($dayOfWeek === 0) {
+            $class = 'sunday';   // 日曜のクラス
         }
+
+        if($startDay <= $day->everyDay() && $toDay > $day->everyDay()){
+          $html[] = '<td class="past-day border '.$class.'">';
+        }else{
+          $html[] = '<td class="border '.$day->getClassName().''.$class.'">';
+        }
+
         $html[] = $day->render();
         $html[] = $day->dayPartCounts($day->everyDay());
         $html[] = '</td>';

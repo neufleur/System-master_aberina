@@ -27,8 +27,8 @@ class CalendarView{
     $html[] = '<th>水</th>';
     $html[] = '<th>木</th>';
     $html[] = '<th>金</th>';
-    $html[] = '<th>土</th>';
-    $html[] = '<th>日</th>';
+    $html[] ='<th class="saturday">土</th>';
+    $html[] ='<th class="sunday">日</th>';
     $html[] = '</tr>';
     $html[] = '</thead>';
     $html[] = '<tbody>';
@@ -42,13 +42,22 @@ class CalendarView{
         $startDay = $this->carbon->copy()->format("Y-m-01"); //月の最初の初めの日
         // $toDay = $this->carbon->copy()->format("Y-m-d");
         $toDay = Carbon::now()->format("Y-m-d");
+        $carbonDay = Carbon::parse($day->everyDay());
+        $dayOfWeek = $carbonDay->dayOfWeek; // 0(日曜) ～ 6(土曜)
+
+        $class = '';
+        if ($dayOfWeek === 6) {
+            $class = 'saturday'; // 土曜のクラス
+        } elseif ($dayOfWeek === 0) {
+            $class = 'sunday';   // 日曜のクラス
+        }
 // 予約表示処理
 $dayDate = new Carbon($day->everyDay());
         //過去の日
-        if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){//月の最初の初めの日が現在よりも早いか && 遅いか　カレンダーの表示
-          $html[] = '<td class="past-day border">';
+        if($startDay <= $day->everyDay() && $toDay > $day->everyDay()){//月の最初の初めの日が現在よりも早いか && 遅いか　カレンダーの表示
+          $html[] = '<td class="past-day border '.$class.'">';
         }else{   //今日以降だった場合
-          $html[] = '<td class="calendar-td '.$day->getClassName().'">';
+          $html[] = '<td class="calendar-td '.$day->getClassName().''.$class.'">';
         }
         $html[] = $day->render();
 

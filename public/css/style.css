@@ -12,11 +12,45 @@ ul,
 li{
   list-style:none;
 }
+/* 背景が途切れないように設定 */
+.scroll-fixed-background {
+  background-color: #ECF1F6;
+  position: fixed; /* 背景がスクロールに合わせて動かないように固定 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* 背景が前面に来ないように */
+}
+
+/* コンテンツ部分 */
+.register-container {
+  width: 25%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin-top: 50px; /* 上部に余白を追加 */
+  z-index: 1;
+}
+
+/* スクロールに関する設定 */
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* コンテンツ部分に余白を追加してスクロール対応 */
+.scroll-container {
+  min-height: 100%; /* コンテンツが足りない場合でもページの高さを補う */
+}
 
 
 /* サイドバー */
 .sidebar{
-  width:150px;
+  position: fixed;
+  width:180px;
   height:100vh;
   background-color:#03AAD2;
   font-weight:bold;
@@ -31,6 +65,7 @@ li{
 }
 .main-container{
   width:100%;
+  margin-left: 150px;
 }
 .sidebar p a{
   color:#FFF;
@@ -513,7 +548,7 @@ li.sub_category_search a{
 /* プロフィール詳細 */
 .user-pro{
   font-size: 18px;
-  padding: 15px 0px 15px 20px;
+  padding: 15px 0px 15px 60px;
 }
 .user_status{
 margin-left: 160px;
@@ -700,4 +735,12 @@ margin-top: 10px;
   transform: scale(0.95); /* 全体を85%に縮小 */
   transform-origin: top center; /* スケーリングの基準位置 */
 
+}
+
+.saturday {
+  color: blue;
+}
+
+.sunday {
+  color: red;
 }

@@ -64,13 +64,9 @@
   {{ csrf_field() }}
       <div class="mt-3">
         <p class="m-0">サブカテゴリー</p>
-        <select class="w-100" name="sub_category_id" >
-          @foreach($main_categories as $main_category)
-          <option value="{{ $main_category->main_category }}">
-          @foreach($main_category->subCategories as $sub_category)
-                            <option value="{{ $sub_category->id }}">{{ $sub_category->sub_category }}</option>
-                        @endforeach
-                    </optgroup>
+        <select class="w-100" name="main_category_id">
+          <option value="{{ $main_category->main_category }}"></option>@foreach($main_categories as $main_category)
+              <option value="{{ $main_category->id }}">{{ $main_category->main_category }}</option>
                 @endforeach
         </select>
         @if($errors->first('sub_category_name'))

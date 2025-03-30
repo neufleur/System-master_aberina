@@ -28,8 +28,10 @@
             </ul>
          </div>
          @endif -->
-        <div class="w-100 vh-100 d-flex" style="align-items:center; justify-content:center; background-color:#ECF1F6">
-            <div class="w-25 vh-75 border p-3" style="background-color:#fff">
+         <div class="scroll-fixed-background"></div>
+         <div class="scroll-container">
+        <div class="w-100 vh-100 d-flex" style="align-items:center; justify-content:center; background-color:#ECF1F6; padding-top:90px;">
+            <div class="w-25 vh-75 border p-3" style="background-color:#fff;margin-top: 40px;">
                 <div class="register_form">
                     <div class="d-flex mt-3" style="justify-content:space-between">
                         <div class="" style="width:140px">
@@ -231,6 +233,7 @@
                 </div>
             </div>
             {{ csrf_field() }}
+        </div>
         </div>
     </form>
     </div>
