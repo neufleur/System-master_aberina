@@ -57,7 +57,7 @@ $dayDate = new Carbon($day->everyDay());
         if($startDay <= $day->everyDay() && $toDay > $day->everyDay()){//月の最初の初めの日が現在よりも早いか && 遅いか　カレンダーの表示
           $html[] = '<td class="past-day border '.$class.'">';
         }else{   //今日以降だった場合
-          $html[] = '<td class="calendar-td '.$day->getClassName().''.$class.'">';
+          $html[] = '<td class="calendar-td border'.$day->getClassName().''.$class.'">';
         }
         $html[] = $day->render();
 

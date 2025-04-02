@@ -11,7 +11,7 @@ $(document).ready(function() {
      // クリックされたらを表示
     $('#modal-date').text("予約日: " + reserveDate);
     $('#modal-part').text("時間: " + reservePart);
-    $('#reserve-modal').data('form-id', formId).fadeIn(); 
+    $('#reserve-modal').data('form-id', formId).fadeIn();
     $('#reserve-modal').fadeIn();
   });
 

@@ -121,6 +121,9 @@ td.past-day {
   border-radius: 5px;
   padding: 5px;
 }
+.calendar td {
+  border: 1px solid #dee2e6;
+}
 
 /* モーダル */
 .modal{

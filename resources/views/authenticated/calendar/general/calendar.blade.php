@@ -13,12 +13,13 @@
       <input type="submit" class="btn btn-primary" value="予約する" form="reserveParts"id="reserve-btn">
     </div>
     <div id="reserve-modal" class="modal" style="display:none;">
-    <div class="modal-content">
-        <h2 id="modal-date"></h2>
-        <p id="modal-time"></p>
+    <div class="modal__bg js-modal-close"></div>
+    <div class="modal__content" style="padding-left: 300px;">
+        <h2 id="modal-date" style="font-size: 16px; margin-bottom: 15px;"></h2>
+        <p id="modal-part"></p>
         <p>上記の予約をキャンセルしてもよろしいですか？</p>
-        <button class="btn btn-primary js-modal-close">閉じる</button>
-        <button type="button" class="btn btn-danger js-delete-reserve">キャンセル</button>
+        <button class="btn btn-primary js-modal-close" style="padding: 4px 20px 4px 20px;">閉じる</button>
+        <button type="button" class="btn btn-danger js-delete-reserve" style="padding: 4px 20px 4px 20px;position: relative;left: 300px;">キャンセル</button>
     </div>
 </div>
   </div>
