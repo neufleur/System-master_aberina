@@ -14,9 +14,9 @@
     </div>
     <div id="reserve-modal" class="modal" style="display:none;">
     <div class="modal__bg js-modal-close"></div>
-    <div class="modal__content" style="padding-left:300px;">
-        <h2 id="modal-date" style="font-size: 16px; margin-bottom: 15px;"></h2>
-        <p id="modal-part"></p>
+    <div class="modal__content" style="text-align:center;">
+        <h2 id="modal-date" style="font-size: 16px; margin-bottom: 15px;padding-right: 195px;"></h2>
+        <p id="modal-part" style="padding-right: 250px;"></p>
         <p>上記の予約をキャンセルしてもよろしいですか？</p>
         <button class="btn btn-primary js-modal-close" style="padding: 4px 20px 4px 20px;">閉じる</button>
         <button type="button" class="btn btn-danger js-delete-reserve" style="padding: 4px 20px 4px 20px;margin-left:160px;">キャンセル</button>
